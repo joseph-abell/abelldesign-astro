@@ -1,0 +1,99 @@
+---
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import Container from '../components/atoms/Container.svelte';
+import Quote from '../components/molecules/Quote.svelte';
+import Intro from '../components/molecules/Intro.svelte';
+import List from '../components/molecules/List.svelte';
+import Services from '../components/molecules/Services.svelte';
+import Brands from '../components/molecules/Brands.svelte';
+
+import fetchData from '../helpers/fetchData';
+import siteQuery from '../queries/site';
+import homeQuery from '../queries/home';
+
+let title = 'Abell Design';
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+const data = (await fetchData(fetch, homeQuery)) || {
+    works: [],
+    services: [],
+    homepage: [{}],
+    brands: []
+};
+
+if (data && data.works) {
+    data.works =
+        (data.works &&
+            data.works.map((work, index) => {
+                work.oddEven = index % 2;
+                return work;
+            })) ||
+        [];
+} else {
+    data.works = [];
+}
+
+if (data && data.services) {
+    data.services = data.services.map((service, index) => {
+        service.oddEven = index % 2;
+        return service;
+    });
+} else {
+    data.services = [];
+}
+
+const { works, services, homepage, brands } = data;
+
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style/global.css">
+</head>
+<body data-barba="wrapper">
+    <WhiteBackground>
+        <Header client:load {header} {menu} />
+
+        <Container data-barba="container">
+            <Intro {homepage} />
+            <Services title="Services" data={services} slugPrefix="/work" linkText="More Services" />
+            <List title="Work" data={works} slugPrefix="/work" linkText="More Work" />
+            <Brands {brands} brandsText={homepage[0].brandsText} />
+            <Quote quote={homepage[0].quote} quoter={homepage[0].quoter} />
+        </Container>
+    </WhiteBackground>
+
+    <Footer footer={footer} />
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+    <script>
+        barba.init({
+            transitions: [{
+                name: 'opacity-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0
+                    });
+                }
+            }]
+        });
+    </script>
+</body>
+</html>
