@@ -67,24 +67,5 @@ const {title, image, subtitle, content, quote, quoter} = collection.data[0];
     </WhiteBackground>
 
     <Footer footer={footer} />
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
-    <script>
-        barba.init({
-            transitions: [{
-                name: 'opacity-transition',
-                leave(data) {
-                    return gsap.to(data.current.container, {
-                        opacity: 0
-                    });
-                },
-                enter(data) {
-                    return gsap.from(data.next.container, {
-                        opacity: 0
-                    });
-                }
-            }]
-        });
-    </script>
 </body>
 </html>
