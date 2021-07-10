@@ -1,0 +1,102 @@
+---
+import Header from '../../components/molecules/Header.svelte';
+import Footer from '../../components/molecules/Footer.svelte';
+import WhiteBackground from '../../components/atoms/WhiteBackground.svelte';
+import Container from '../../components/atoms/Container.svelte';
+import ListH1 from '../../components/atoms/ListH1.svelte';
+import H2 from '../../components/atoms/H2.svelte';
+
+import fetchData from '../../helpers/fetchData';
+import siteQuery from '../../queries/site';
+import query from '../../queries/blogs';
+
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+let title = 'Blog - Abell Design';
+
+const data = await fetchData(fetch, query);
+const blogs = data.blogs.filter((blog) => blog.stage === 'PUBLISHED');
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style/global.css">
+    <style>
+        @media (min-width: 768px) {
+            .blog-list {
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+            }
+
+            .blog-list-item {
+                width: 30%;
+                padding: 20px;
+            }
+        }
+        .blog-list-item {
+            margin-bottom: 40px;
+        }
+        .blog-list-item p {
+            color: #b40808;
+        }
+    </style>
+</head>
+<body data-barba="wrapper">
+    <WhiteBackground>
+        <Header client:load {header} {menu} />
+
+        <Container data-barba="container" >
+            <ListH1>Blog</ListH1>
+
+                <ul class="blog-list">
+                    {blogs.map((blog) => (
+                        <li class="blog-list-item">
+                            <a href={`/blog/${blog.slug}`}>
+                                <div style="height: 200px">
+                                    <div style="display: flex; align-items: center; justify-content: center;">
+                                        <img src={blog.featuredImage.url} alt="" />
+                                    </div>
+                                </div>
+
+                                <H2 style="text-align: left;">{blog.title}</H2>
+                                <p>{blog.featuredLinkText}</p>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+        </Container>
+    </WhiteBackground>
+
+    <Footer footer={footer} />
+
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+    <script>
+        barba.init({
+            transitions: [{
+                name: 'opacity-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0
+                    });
+                }
+            }]
+        });
+    </script>
+</body>
+</html>

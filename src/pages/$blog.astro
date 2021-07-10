@@ -1,0 +1,90 @@
+---
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import Container from '../components/atoms/Container.svelte';
+	import ListH1 from '../components/atoms/ListH1.svelte';
+	import H2 from '../components/atoms/H2.svelte';
+	import Quote from '../components/molecules/Quote.svelte';
+
+import fetchData from '../helpers/fetchData';
+import siteQuery from '../queries/site';
+import query from '../queries/blogs';
+
+const { collection } = Astro.props;
+
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+export async function createCollection() {
+    const {blogs} = await fetchData(fetch, query);
+
+    return {
+        routes: blogs.map(blog => ({name: blog.slug, index: blog.id})),
+        permalink: ({ params }) => `/blog/${params.name}`,
+        async data({ params }) {
+            return blogs.find(blog => blog.slug === params.name)
+        },
+        pageSize: Infinity,
+    };
+}
+
+const {title, image, subtitle, content, quote, quoter} = collection.data[0];
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{title} - Abell Design</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style/global.css">
+</head>
+<body data-barba="wrapper">
+    <WhiteBackground>
+        <Header client:load {header} {menu} />
+
+        <Container data-barba="container" >
+            <ListH1>{title}</ListH1>
+            {image && (
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <img src={image.url} alt="" />
+                </div>
+            )}
+            <H2>{subtitle}</H2>
+            <div class="html">
+                {content.html}
+            </div>
+            {quote && (
+                <Quote quote={quote} quoter={quoter} />
+            )}
+        </Container>
+    </WhiteBackground>
+
+    <Footer footer={footer} />
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+    <script>
+        barba.init({
+            transitions: [{
+                name: 'opacity-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0
+                    });
+                }
+            }]
+        });
+    </script>
+</body>
+</html>

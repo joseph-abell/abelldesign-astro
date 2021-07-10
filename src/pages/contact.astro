@@ -1,0 +1,181 @@
+---
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import Container from '../components/atoms/Container.svelte';
+import ListH1 from '../components/atoms/ListH1.svelte';
+import A from '../components/atoms/A.svelte';
+// import Map from '../components/atoms/Map.svelte';
+// import MapMarker from '../components/atoms/MapMarker.svelte';
+
+import fetchData from '../helpers/fetchData';
+import siteQuery from '../queries/site';
+import query from '../queries/contact';
+
+let siteTitle = 'Contact - Abell Design';
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+const data = await fetchData(fetch, query);
+const { contacts }  = data;
+
+let {
+		address,
+		addressImage,
+		instagramImage,
+		instagramLink,
+		instagramLinkText,
+		phoneImage,
+		phoneText,
+		linkedInImage,
+		linkedInLinkText,
+		linkedInLink,
+		emailTitle,
+		emailLink,
+		emailLinkText,
+		emailImage,
+		title,
+		map,
+		mapZoom
+	} = contacts[0];
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{siteTitle}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style/global.css">
+    <script>
+    function initMap() {
+        const theDrey = { lat: 53.9524713, lng: -1.0714173 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 16,
+          center: theDrey,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: theDrey,
+          map: map,
+        });
+      }
+
+    </script>
+
+    <style>
+        li.contact {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .image {
+            margin-right: 20px;
+        }
+
+        .contact-container {
+            margin-bottom: 40px;
+        }
+
+        img {
+            width: 24px;
+        }
+        @media (min-width: 768px) {
+            .contact-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-column-gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body data-barba="wrapper">
+    <WhiteBackground>
+        <Header client:load {header} {menu} />
+
+        <Container data-barba="container" >
+	<ListH1>{title}</ListH1>
+	<div class="contact-container">
+		<ul>
+			<li class="contact">
+				<div class="image">
+					<img src={emailImage.url} alt="" />
+				</div>
+				<div class="text">
+					{emailTitle} {" "}
+					<A href={emailLink}>{emailLinkText}</A>
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={phoneImage.url} alt="" />
+				</div>
+				<div class="text">
+					{phoneText}
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={addressImage.url} alt="" />
+				</div>
+				<div class="text">
+					{address}
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={linkedInImage.url} alt="" />
+				</div>
+				<div class="text">
+					<A href={linkedInLink}>{linkedInLinkText}</A>
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={instagramImage.url} alt="" />
+				</div>
+				<div class="text">
+					<A href={instagramLink}>{instagramLinkText}</A>
+				</div>
+			</li>
+		</ul>
+
+        <div id="map"></div>
+	</div>
+        </Container>
+    </WhiteBackground>
+
+    <Footer footer={footer} />
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+    <script>
+        barba.init({
+            transitions: [{
+                name: 'opacity-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0
+                    });
+                }
+            }]
+        });
+    </script>
+</body>
+</html>

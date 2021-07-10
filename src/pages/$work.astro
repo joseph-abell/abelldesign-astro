@@ -1,0 +1,120 @@
+---
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import Container from '../components/atoms/Container.svelte';
+import WorkImage from '../components/atoms/WorkImage.svelte';
+import ListH1 from '../components/atoms/ListH1.svelte';
+import WorkPrimaryImages from '../components/atoms/WorkPrimaryImages.svelte';
+import WorkPrimaryImage from '../components/atoms/WorkPrimaryImage.svelte';
+import WorkMain from '../components/atoms/WorkMain.svelte';
+import Quote from '../components/molecules/Quote.svelte';
+import MoreWork from '../components/atoms/MoreWork.svelte';
+
+import fetchData from '../helpers/fetchData';
+import siteQuery from '../queries/site';
+import query from '../queries/works';
+import nextWorkQuery from '../queries/nextWork';
+import firstWorkQuery from '../queries/firstWork';
+
+const { collection } = Astro.props;
+
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+const work = collection.data[0];
+const nextWork = await fetchData(fetch, nextWorkQuery, { id: work.id });
+let nextData = nextWork.worksConnection.edges[0];
+let next;
+
+if (!!nextData) {
+    next = nextData && nextData.node;
+} else {
+    nextData = await fetchData(fetch, firstWorkQuery);
+    next = nextData.works[0];
+}
+
+export async function createCollection() {
+    const {works} = await fetchData(fetch, query);
+    return {
+        routes: works.map(work => ({slug: work.slug})),
+        permalink: ({ params }) => `/work/${params.slug}`,
+        async data({ params }) {
+            return works.find(work => work.slug === params.slug)
+        },
+        pageSize: Infinity,
+    };
+}
+
+
+---
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{work.title} - Abell Design</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/style/global.css">
+</head>
+<body data-barba="wrapper">
+    <WhiteBackground>
+        <Header client:load {header} {menu} />
+
+        <Container data-barba="container" >
+            <ListH1>{work.title}</ListH1>
+                <WorkPrimaryImages>
+                    {work.images.map(image => (
+                        <WorkPrimaryImage>
+                            <img src={image.url} alt='' />
+                        </WorkPrimaryImage>
+                    ))}
+                </WorkPrimaryImages>
+
+                <WorkMain>
+                    <p class="subtitle">{work.subtitle}</p>
+                    <div class="markdown">
+                        {work.content.html}
+                    </div>
+                    {work?.quote?.length > 0 && (
+                        <Quote quote={work.quote} quoter={work.quoteAuthor} />
+                    )}
+                    <WorkPrimaryImages>
+                    {work.secondaryImages.map(image => (
+                        <WorkPrimaryImage>
+                            <img src={image.url} alt='' />
+                        </WorkPrimaryImage>
+                    ))}
+                    </WorkPrimaryImages>
+                    <MoreWork {next} />
+                </WorkMain>
+        </Container>
+    </WhiteBackground>
+
+    <Footer footer={footer} />
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.0/gsap.min.js"></script>
+    <script>
+        barba.init({
+            transitions: [{
+                name: 'opacity-transition',
+                leave(data) {
+                    return gsap.to(data.current.container, {
+                        opacity: 0
+                    });
+                },
+                enter(data) {
+                    return gsap.from(data.next.container, {
+                        opacity: 0
+                    });
+                }
+            }]
+        });
+    </script>
+</body>
+</html>
