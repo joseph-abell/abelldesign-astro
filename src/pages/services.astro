@@ -43,11 +43,11 @@ const quoter = servicesPages[0].quoter;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/style/global.css">
 </head>
-<body data-barba="wrapper">
+<body>
     <WhiteBackground>
         <Header client:load {header} {menu} />
 
-        <Container data-barba="container">
+        <Container>
 	<Services title="Services" data={services} slugPrefix="/work" linkText="" />
 	<Quote {quote} {quoter} />
         </Container>

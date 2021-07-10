@@ -44,11 +44,11 @@ let quoter = worksPages[0].quoter;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="stylesheet" href="/style/global.css">
 </head>
-<body data-barba="wrapper">
+<body>
     <WhiteBackground>
         <Header client:load {header} {menu} />
 
-        <Container data-barba="container" >
+        <Container>
 	<List title="Work" data={works} headerType="h1" slugPrefix="/work" />
 
 	<Quote {quote} {quoter} />
