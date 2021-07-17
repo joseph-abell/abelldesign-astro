@@ -3,9 +3,9 @@ import Header from '../components/molecules/Header.svelte';
 import Footer from '../components/molecules/Footer.svelte';
 import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
 import Container from '../components/atoms/Container.svelte';
-	import ListH1 from '../components/atoms/ListH1.svelte';
-	import H2 from '../components/atoms/H2.svelte';
-	import Quote from '../components/molecules/Quote.svelte';
+import ListH1 from '../components/atoms/ListH1.svelte';
+import H2 from '../components/atoms/H2.svelte';
+import Quote from '../components/molecules/Quote.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -26,9 +26,10 @@ export async function createCollection() {
     const {blogs} = await fetchData(fetch, query);
 
     return {
-        routes: blogs.map(blog => ({name: blog.slug, index: blog.id})),
+        routes: (blogs || []).map(blog => ({name: blog.slug, index: blog.id})),
         permalink: ({ params }) => `/blog/${params.name}`,
         async data({ params }) {
+            if (!params.slug) return {};
             return blogs.find(blog => blog.slug === params.name)
         },
         pageSize: Infinity,
@@ -36,6 +37,7 @@ export async function createCollection() {
 }
 
 const {title, image, subtitle, content, quote, quoter} = collection.data[0];
+const { html } = quote || { html: '' };
 ---
 <html lang="en">
 <head>
@@ -43,6 +45,9 @@ const {title, image, subtitle, content, quote, quoter} = collection.data[0];
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{title} - Abell Design</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="/style/global.css">
 </head>
 <body>
@@ -58,7 +63,7 @@ const {title, image, subtitle, content, quote, quoter} = collection.data[0];
             )}
             <H2>{subtitle}</H2>
             <div class="html">
-                {content.html}
+                {html}
             </div>
             {quote && (
                 <Quote quote={quote} quoter={quoter} />
