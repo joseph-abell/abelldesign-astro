@@ -105,10 +105,14 @@
     }
 
     @media (max-width: 767px) {
-        svg, p, .deck, .credit {
+        svg, .deck, .credit {
             position: static;
             padding: 40px 0 0 40px;
             text-align: left;
+        }
+
+        .credit p {
+            padding-bottom: 20px;
         }
 
         .deck {
