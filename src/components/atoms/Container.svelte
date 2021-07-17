@@ -1,4 +1,4 @@
-<article>
+<article class:isHome>
 	<slot />
 </article>
 
@@ -8,6 +8,10 @@
 		margin: 0 auto;
 		padding-top: 90px;
 	}
+
+    article.isHome {
+        padding-top: 20px;
+    }
 
 	@media (min-width: 768px) {
 		article {
@@ -20,3 +24,7 @@
 		}
 	}
 </style>
+
+<script>
+    export let isHome = false;
+</script>

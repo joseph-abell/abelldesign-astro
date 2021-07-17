@@ -4,6 +4,7 @@
 
 	export let header = { image: { url: '', height: '' } };
 	export let menu = [{}];
+    export let isHome = false;
 
 	let src = header.image.url;
 	let alt = 'Abell Design';
@@ -12,14 +13,14 @@
 </script>
 
 <div class="header-container">
-	<header>
+	<header class:isHome>
 		<div>
 			<a href={`${menu[0].slug}`}>
 				<img {alt} {src} />
 			</a>
 		</div>
 
-		<MenuButton {onClick} {menuOpen} />
+		<MenuButton {onClick} {menuOpen} isHome={isHome} />
 
 		<Menu {menu} {menuOpen} />
 	</header>
@@ -28,7 +29,9 @@
 <style>
 	.header-container {
 		position: relative;
+        top: 0;
 		background: #ffffee;
+        z-index: 2;
 	}
 	header {
 		position: fixed;
@@ -37,6 +40,10 @@
 		width: 100vw;
 		z-index: 2;
 	}
+    header.isHome {
+        position: static;
+    }
+
 	header div {
 		margin: 0 auto;
 		padding-top: 20px;

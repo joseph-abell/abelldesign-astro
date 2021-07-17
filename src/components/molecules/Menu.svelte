@@ -26,6 +26,7 @@
 		transition: left 0.3s ease-in-out;
 		background: #ffffee;
 		overflow-y: auto;
+        padding-top: 40px;
 	}
 
 	menu.menuOpen {
@@ -40,6 +41,7 @@
 	li {
 		display: block;
 		border-bottom: 1px dashed black;
+        padding: 10px 0;
 	}
 
 	@media (min-width: 768px) {
@@ -64,6 +66,7 @@
 
 		li {
 			border-bottom: 0;
+            padding: 0;
 		}
 	}
 
