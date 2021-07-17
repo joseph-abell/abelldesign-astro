@@ -1,4 +1,5 @@
 ---
+import CTA from '../components/atoms/CTA.svelte';
 import Header from '../components/molecules/Header.svelte';
 import Footer from '../components/molecules/Footer.svelte';
 import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
@@ -52,6 +53,7 @@ if (data && data.services) {
 }
 
 const { works, services, homepage, brands } = data;
+console.log(homepage[0])
 
 ---
 <html lang="en">
@@ -67,6 +69,7 @@ const { works, services, homepage, brands } = data;
 </head>
 <body>
     <WhiteBackground>
+        <CTA deck={homepage[0].cta} client={homepage[0].ctaClient} project={homepage[0].ctaProject} />
         <Header client:load {header} {menu} />
 
         <Container>
