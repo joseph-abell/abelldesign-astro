@@ -1,8 +1,9 @@
 <script>
 	export let style = '';
+    export let itemprop;
 </script>
 
-<h1 {style}><slot /></h1>
+<h1 {style} itemprop={itemprop}><slot /></h1>
 
 <style>
 	h1 {

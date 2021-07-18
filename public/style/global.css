@@ -103,3 +103,14 @@ a {
     height: 400px;
     width: 100%;
   }
+
+.blogArticle .subtitle {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+.markdown {
+    margin-bottom: 60px;
+}
+.markdown p {
+    margin-bottom: 20px;
+}

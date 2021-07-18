@@ -1,4 +1,4 @@
-<div><slot /></div>
+<div class="blogArticle"><slot /></div>
 
 <style>
 	@media (min-width: 768px) {

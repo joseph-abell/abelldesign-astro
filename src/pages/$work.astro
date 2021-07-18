@@ -90,8 +90,8 @@ export async function createCollection() {
 
         <Container>
             {work.title && (
-                <>
-                    <ListH1>{work.title}</ListH1>
+                <div>
+                    <ListH1 itemprop="headline">{work.title}</ListH1>
                     <WorkPrimaryImages>
                         {(work.images || []).map(image => (
                             <WorkPrimaryImage>
@@ -117,7 +117,7 @@ export async function createCollection() {
                         </WorkPrimaryImages>
                         <MoreWork {next} />
                     </WorkMain>
-                </>
+                </div>
             )}
 
             {works && (
