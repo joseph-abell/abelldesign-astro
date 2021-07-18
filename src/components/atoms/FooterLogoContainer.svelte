@@ -5,7 +5,7 @@
 		width: 270px;
 		margin: 40px auto 20px;
 	}
-	@media (min-width: 768px) {
+	@media (min-width: 900px) {
 		div {
 			width: auto;
 			margin: inherit;

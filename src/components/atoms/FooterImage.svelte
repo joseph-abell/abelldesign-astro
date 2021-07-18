@@ -14,6 +14,7 @@
 	}
 	img {
 		margin: 0 auto;
+        width: 72px;
 	}
 	@media (min-width: 768px) {
 		img {

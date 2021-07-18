@@ -90,12 +90,12 @@ export async function createCollection() {
 
         <Container>
             {work.title && (
-                <div>
-                    <ListH1>{work.title}</ListH1>
+                <div itemscope itemtype="https://schema.org/Service">
+                    <ListH1 itemprop="name">{work.title}</ListH1>
                     <WorkPrimaryImages>
                         {(work.images || []).map(image => (
                             <WorkPrimaryImage>
-                                <img src={image.url} alt='' />
+                                <img src={image.url} alt='' itemprop="image" />
                             </WorkPrimaryImage>
                         ))}
                     </WorkPrimaryImages>

@@ -89,7 +89,8 @@
         filter: drop-shadow(2px 2px 2px rgb(0 0 0 / 0.4));
     }
     p {
-        text-shadow: 2px 2px rgb(0 0 0 / 0.4);
+        text-shadow: 2px 2px rgb(0 0 0 / 0.8);
+        font-size: 30px;
     }
 
     .deck {
@@ -100,14 +101,18 @@
     }
 
     .deck .title {
-        font-size: 30px;
-        margin-bottom:10px;
+        font-size: 40px;
+        margin-bottom: 10px;
     }
 
     @media (max-width: 767px) {
         .cta {
-            height: 400px;
-            background: url("/assets/cta.jpg") no-repeat 50% 40% fixed;
+            height: auto;
+            background: #ffffef;
+            text-shadow: none;
+            color: #000000;
+            padding: 0;
+            margin-top: 90px;
         }
 
         svg {
@@ -122,6 +127,16 @@
 
         .deck {
             width: 80vw;
+        }
+
+        .deck .title {
+            font-size: 30px;
+            line-height: 40px;
+        }
+
+        p {
+            font-size: 20px;
+            text-shadow: none;
         }
     }
 </style>

@@ -31,4 +31,8 @@
 		row-gap: 40px;
 		margin-bottom: 30px;
 	}
+
+    .brand-list div {
+        height: 100%;
+    }
 </style>
