@@ -44,6 +44,7 @@
 
 	p {
 		color: rgba(0, 0, 0, 0.9);
+        margin-bottom: 20px;
 	}
 
 	@media (min-width: 768px) {

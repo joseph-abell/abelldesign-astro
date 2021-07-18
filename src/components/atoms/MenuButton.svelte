@@ -33,7 +33,6 @@
 
     button.isHome {
         transition: transform 0.2s ease-in-out, color 0.2s ease-in-out text-shadow 0.2s ease-in-out;
-        position: absolute;
     }
 
     button.isHome.menuOpen {

@@ -5,7 +5,6 @@ import Footer from '../components/molecules/Footer.svelte';
 import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
 import Container from '../components/atoms/Container.svelte';
 import Quote from '../components/molecules/Quote.svelte';
-import Intro from '../components/molecules/Intro.svelte';
 import List from '../components/molecules/List.svelte';
 import Services from '../components/molecules/Services.svelte';
 import Brands from '../components/molecules/Brands.svelte';
@@ -68,11 +67,13 @@ const { works, services, homepage, brands } = data;
 </head>
 <body>
     <WhiteBackground>
-        <CTA deck={homepage[0].cta} client={homepage[0].ctaClient} project={homepage[0].ctaProject} />
-        <Header client:load {header} {menu} isHome={true} />
+        <div class="header-container">
+            <CTA title={homepage[0].title} subtitle={homepage[0].subtitle} />
+            <Header client:load {header} {menu} isHome={true} />
+
+        </div>
 
         <Container isHome={true}>
-            <Intro {homepage} />
             <Services title="Services" data={services} slugPrefix="/work" linkText="More Services" />
             <List title="Work" data={works} slugPrefix="/work" linkText="More Work" />
             <Brands {brands} brandsText={homepage[0].brandsText} />

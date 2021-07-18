@@ -1,5 +1,6 @@
 <div class="cta">
-    <svg
+    <a href="/#article">
+        <svg
         version="1.1"
         id="Layer_1"
         xmlns:x="&ns_extend;"
@@ -59,11 +60,12 @@
             </g>
         </switch>
     </svg>
+    </a>
+    
 
-    <p class="deck">{deck}</p>
-    <div class="credit">
-        <p>{client}</p>
-        <p>{project}</p>
+    <div class="deck">
+        <p class="title">{title}</p>
+        <p class="subtitle">{subtitle}</p>
     </div>
 </div>
 
@@ -75,12 +77,13 @@
         background-size: cover;
         color: white;
         position: relative;
+        padding-top: 100px;
     }
 
     svg {
         width: 200px;
         display: block;
-        top: 40px;
+        top: 60px;
         position: absolute;
         left: 40px;
         filter: drop-shadow(2px 2px 2px rgb(0 0 0 / 0.4));
@@ -92,40 +95,38 @@
     .deck {
         position: absolute;
         bottom: 40px;
-        font-size: 30px;
         left: 40px;
-        width: 40vw;
-
+        width: 60vw;
     }
-    .credit {
-        position: absolute;
-        bottom: 40px;
-        right: 40px;
-        text-align: right;
+
+    .deck .title {
+        font-size: 30px;
+        margin-bottom:10px;
     }
 
     @media (max-width: 767px) {
-        svg, .deck, .credit {
+        .cta {
+            height: 400px;
+            background: url("/assets/cta.jpg") no-repeat 50% 40% fixed;
+        }
+
+        svg {
+            display: none;
+        }
+
+        .deck {
             position: static;
             padding: 40px 0 0 40px;
             text-align: left;
         }
 
-        .credit p {
-            padding-bottom: 20px;
-        }
-
         .deck {
             width: 80vw;
-        }
-        .cta {
-            max-height: 500px;
         }
     }
 </style>
 
 <script>
-export let deck;
-export let client;
-export let project;
+    export let title;
+    export let subtitle;
 </script>

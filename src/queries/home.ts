@@ -38,11 +38,7 @@ export const home = `
         url
         height
       }
-      cta
-      ctaClient
-      ctaProject
       contactLinkText
-      callToActionText
       workLinkText
       servicesLinkText
       brandsText

@@ -13,9 +13,9 @@
 </script>
 
 <div class="header-container">
-	<header class:isHome>
+	<header class:isHome id="article">
 		<div>
-			<a href={`${menu[0].slug}`}>
+			<a href={`${menu[0].slug}#article`}>
 				<img {alt} {src} />
 			</a>
 		</div>
@@ -41,7 +41,8 @@
 		z-index: 2;
 	}
     header.isHome {
-        position: static;
+        position: fixed;
+        top: 0;
     }
 
 	header div {
@@ -57,11 +58,16 @@
 			width: 80vw;
 		}
 		header {
-			position: static;
 			width: auto;
 			display: flex;
 			align-items: center;
+            position: static;
 		}
+
+        header.isHome {
+            position: static;
+        }
+
 		header div {
 			margin: 0;
 			float: left;
