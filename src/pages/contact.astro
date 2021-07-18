@@ -104,7 +104,7 @@ let {
 
         <Container>
 	<ListH1>{title}</ListH1>
-	<div class="contact-container">
+	<div class="contact-container" itemscope itemtype="https://schema.org/LocalBusiness">
 		<ul>
 			<li class="contact">
 				<div class="image">
@@ -112,14 +112,14 @@ let {
 				</div>
 				<div class="text">
 					{emailTitle} {" "}
-					<A href={emailLink}>{emailLinkText}</A>
+					<A href={emailLink} itemprop="email">{emailLinkText}</A>
 				</div>
 			</li>
 			<li class="contact">
 				<div class="image">
 					<img src={phoneImage.url} alt="" />
 				</div>
-				<div class="text">
+				<div class="text" itemprop="telephone">
 					{phoneText}
 				</div>
 			</li>
@@ -127,7 +127,7 @@ let {
 				<div class="image">
 					<img src={addressImage.url} alt="" />
 				</div>
-				<div class="text">
+				<div class="text" itemprop="address">
 					{address}
 				</div>
 			</li>
@@ -149,7 +149,7 @@ let {
 			</li>
 		</ul>
 
-        <div id="map"></div>
+        <div id="map" itemscope itemtype="https://schema.org/Map"></div>
 	</div>
         </Container>
     </WhiteBackground>

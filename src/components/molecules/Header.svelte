@@ -16,7 +16,7 @@
 	<header class:isHome id="article">
 		<div>
 			<a href={`${menu[0].slug}#article`}>
-				<img {alt} {src} />
+				<img {alt} {src} itemprop="logo" />
 			</a>
 		</div>
 

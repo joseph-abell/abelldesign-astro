@@ -1,4 +1,4 @@
-<p><slot /></p>
+<p itemprop="author"><slot /></p>
 
 <style>
 	p {

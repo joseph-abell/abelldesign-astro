@@ -1,4 +1,4 @@
-<div><slot /></div>
+<div itemscope itemtype="https://schema.org/Quotation"><slot /></div>
 
 <style>
 	div {

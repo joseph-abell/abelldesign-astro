@@ -1,4 +1,4 @@
-<p><slot /></p>
+<p itemprop="text"><slot /></p>
 
 <style>
 	p {

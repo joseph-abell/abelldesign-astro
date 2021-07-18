@@ -9,9 +9,9 @@
 
 	<ul class="brand-list">
 		{#each brands as brand (brand.id)}
-			<li>
+			<li itemscope itemtype="https://schema.org/Organization">
 				<div style="display: flex; align-items: center; justify-content: center;">
-					<img alt="" src={brand.image.url} style="margin: 0 auto 20px" />
+					<img alt="" src={brand.image.url} style="margin: 0 auto 20px" itemtype="logo" />
 				</div>
 			</li>
 		{/each}

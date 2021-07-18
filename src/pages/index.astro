@@ -8,6 +8,8 @@ import Quote from '../components/molecules/Quote.svelte';
 import List from '../components/molecules/List.svelte';
 import Services from '../components/molecules/Services.svelte';
 import Brands from '../components/molecules/Brands.svelte';
+import Hero from '../components/atoms/Hero.svelte';
+
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -64,13 +66,20 @@ const { works, services, homepage, brands } = data;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="/style/global.css">
+
+    <style>
+    .hidden {
+        position: absolute;
+        left: -100vw;
+    }
+    </style>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/LocalBusiness">
+    <p class="hidden" itemprop="name">Abell Design</p>
     <WhiteBackground>
         <div class="header-container">
             <CTA title={homepage[0].title} subtitle={homepage[0].subtitle} />
             <Header client:load {header} {menu} isHome={true} />
-
         </div>
 
         <Container isHome={true}>
@@ -82,14 +91,5 @@ const { works, services, homepage, brands } = data;
     </WhiteBackground>
 
     <Footer footer={footer} />
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-102804990-2', 'auto');
-        ga('send', 'pageview');
-    </script>
 </body>
 </html>
