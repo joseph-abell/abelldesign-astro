@@ -39,7 +39,7 @@ export async function createCollection() {
 }
 
 const {title, image, subtitle, content = {html: ''}, quote, quoter} = collection.data[0];
-const blogs = collection.data[0].blogs?.filter((blog) => blog.stage === 'PUBLISHED')
+const blogs = collection.data[0].blogs?.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
 const { html } = content;
 ---
 <html lang="en">

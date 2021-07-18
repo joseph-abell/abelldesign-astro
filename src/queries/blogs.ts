@@ -20,6 +20,7 @@ const blogs = `
             stage
             subtitle
             title
+            createdAt
         }
     }
   

@@ -60,15 +60,12 @@ export async function createCollection() {
         async data({ params }) {
             if (!params.slug) {
                 return {
-                    works: works || [],
+                    works,
                     quote,
                     quoter
                 }
             }
             return {
-                works: [],
-                quote: '',
-                quoter: '',
                 ...(works || []).find(work => work.slug === params.slug),
             }
         },
@@ -123,9 +120,13 @@ export async function createCollection() {
                 </>
             )}
 
-            <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
+            {works && (
+                <>
+                    <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
 
-            <Quote quote={quote} quoter={quoter} />
+                    <Quote quote={quote} quoter={quoter} />
+                </>
+            )}
         </Container>
     </WhiteBackground>
 

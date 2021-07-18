@@ -60,6 +60,10 @@
 			justify-content: space-between;
 			align-items: stretch;
 		}
+
+        .footer-container ul {
+            margin-right: 20px;
+        }
 	}
 
 	@media (min-width: 1200px) {

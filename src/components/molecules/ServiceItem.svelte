@@ -47,7 +47,7 @@
         margin-bottom: 20px;
 	}
 
-	@media (min-width: 768px) {
+	@media (min-width: 1000px) {
 		.data-item-link {
 			padding: 0;
 			display: flex;

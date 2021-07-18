@@ -1,12 +1,13 @@
 export const home = `
   query {
-    works(first:2) {
+    works {
       id
       createdAt
       publishedAt
       title
       slug
       featuredDeck
+      showOnHomepage
       featuredImage {
         url
         height
@@ -16,12 +17,13 @@ export const home = `
         markdown
       }
     }
-    services(first:2) {
+    services {
       id
       createdAt
       publishedAt
       title
       featuredDeck
+      showOnHomepage
       featuredImage {
         url
         height

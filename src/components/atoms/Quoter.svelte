@@ -3,7 +3,6 @@
 <style>
 	p {
 		line-height: 28px;
-		width: 70vw;
 		margin: 0 auto;
 		text-align: center;
 	}

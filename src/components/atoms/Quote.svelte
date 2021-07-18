@@ -4,7 +4,6 @@
 	p {
 		font-style: italic;
 		line-height: 28px;
-		width: 70vw;
 		margin: 0 auto 10px;
 		text-align: center;
 	}
