@@ -75,6 +75,7 @@ const { html } = content;
     footer={footer}
     isHome={false}
 >
+    <div id="swup">
     <Container>
         {title && (
             <div itemtype="https://schema.org/BlogPosting">
@@ -119,4 +120,7 @@ const { html } = content;
             </>
         )}
     </Container>
+    </div>
+
+    <script type="module" src="/app.js" />
 </Layout>

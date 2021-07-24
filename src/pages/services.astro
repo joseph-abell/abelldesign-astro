@@ -38,8 +38,13 @@ const quoter = servicesPages[0].quoter;
     footer={footer}
     isHome={false}
 >
-    <Container>
-        <Services title="Services" data={services} slugPrefix="/work" linkText="" />
-        <Quote {quote} {quoter} />
-    </Container>
+    <div id="swup">
+        <Container>
+            <Services title="Services" data={services} slugPrefix="/work" linkText="" />
+            <Quote {quote} {quoter} />
+        </Container>
+    </div>
+    
+
+    <script type="module" src="/app.js" />
 </Layout>

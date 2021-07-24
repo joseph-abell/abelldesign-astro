@@ -82,6 +82,7 @@ export async function createCollection() {
     footer={footer}
     isHome={false}
 >
+<div id="swup">
     <Container>
         {work.title && (
             <div itemscope itemtype="https://schema.org/Service">
@@ -122,4 +123,7 @@ export async function createCollection() {
             </>
         )}
     </Container>
+</div>
+
+    <script type="module" src="/app.js" />
 </Layout>

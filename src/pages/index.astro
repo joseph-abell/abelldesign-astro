@@ -57,10 +57,14 @@ const { works, services, homepage, brands } = data;
     client:load
     homepage={homepage[0]}
 >
-    <Container isHome={true}>
-        <Services title="Services" data={services} slugPrefix="/work" linkText="More Services" />
-        <List title="Work" data={works} slugPrefix="/work" linkText="More Work" />
-        <Brands {brands} brandsText={homepage[0].brandsText} />
-        <Quote quote={homepage[0].quote} quoter={homepage[0].quoter} />
-    </Container>
+    <div id="swup">
+        <Container isHome={true}>
+            <Services title="Services" data={services} slugPrefix="/work" linkText="More Services" />
+            <List title="Work" data={works} slugPrefix="/work" linkText="More Work" />
+            <Brands {brands} brandsText={homepage[0].brandsText} />
+            <Quote quote={homepage[0].quote} quoter={homepage[0].quoter} />
+        </Container>
+    </div>
+
+    <script type="module" src="/app.js" />
 </Layout>

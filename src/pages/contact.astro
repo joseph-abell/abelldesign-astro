@@ -75,6 +75,7 @@ let {
     footer={footer}
     isHome={false}
 >
+    <div id="swup">
     <Container>
         <ListH1>{title}</ListH1>
         <div class="contact-container" itemscope itemtype="https://schema.org/LocalBusiness">
@@ -125,7 +126,8 @@ let {
             <div id="map" itemscope itemtype="https://schema.org/Map"></div>
         </div>
     </Container>
-
+    </div>
+    
     <script>
         function initMap() {
             const theDrey = { lat: 53.9524713, lng: -1.0714173 };
@@ -143,4 +145,5 @@ let {
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
         async
     />
+    <script type="module" src="/app.js" />
 </Layout>

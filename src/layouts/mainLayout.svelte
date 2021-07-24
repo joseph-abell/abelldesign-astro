@@ -6,7 +6,10 @@
     import CTA from '../components/atoms/CTA.svelte';
 
     export let title, menu, header, footer, isHome, homepage;
+
     menu = (menu || []).sort((a, b) => a.order - b.order);
+
+
 </script>
 
 <style>
@@ -32,12 +35,13 @@
     <WhiteBackground>
         <div class="header-container">
             {#if homepage}
-                <CTA title={homepage.title} subtitle={homepage.subtitle} slot="cta" />
+                <CTA title={homepage.title} subtitle={homepage.subtitle} />
             {/if}
             <Header {header} {menu} isHome={isHome} />
         </div>
 
         <slot />
+
     </WhiteBackground>
 
     <Footer footer={footer} />

@@ -7,7 +7,9 @@
     "build": "astro build"
   },
   "devDependencies": {
+    "@swup/slide-theme": "^1.0.5",
     "astro": "^0.17.3",
-    "svelte": "^3.38.3"
+    "svelte": "^3.38.3",
+    "swup": "^2.0.14"
   }
 }
