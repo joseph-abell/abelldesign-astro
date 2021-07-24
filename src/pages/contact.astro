@@ -103,7 +103,6 @@ let {
 </head>
 <body>
 <div data-barba='wrapper'>
-<div data-barba='container'>
     <WhiteBackground>
         <Header client:load {header} {menu} />
 
@@ -160,8 +159,6 @@ let {
     </WhiteBackground>
 
     <Footer footer={footer} />
-</div>
-
     </div>
 <ScreenTransition />
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
@@ -209,7 +206,7 @@ function loaderAway() {
         ease: 'power4.inOut'
     });
 }
-barba.init({
+    barba.init({
     transitions: [{
         async leave() {
             await loaderIn();
@@ -218,10 +215,6 @@ barba.init({
             loaderAway();
         }
     }]
-});
-
-barba.hooks.enter(() => {
-    window.scrollTo(0, 0);
 });
 
 gsap.set(loader, {

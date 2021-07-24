@@ -77,7 +77,6 @@ const { works, services, homepage, brands } = data;
 </head>
 <body itemscope itemtype="https://schema.org/LocalBusiness">
 <div data-barba="wrapper">
-<div data-barba="container">
     <p class="hidden" itemprop="name">Abell Design</p>
     <WhiteBackground>
         <div class="header-container">
@@ -95,7 +94,6 @@ const { works, services, homepage, brands } = data;
 
     <Footer footer={footer} />
     </div>
-    </div>
     <ScreenTransition />
     <script>
     const loader = document.querySelector('.loader');
@@ -107,7 +105,7 @@ const { works, services, homepage, brands } = data;
             scaleX: 0,
             xPercent: -5
         },
-
+        
         {
             duration: 0.4,
             xPercent: 0,
@@ -129,8 +127,7 @@ function loaderAway() {
         ease: 'power4.inOut'
     });
 }
-
-barba.init({
+    barba.init({
     transitions: [{
         async leave() {
             await loaderIn();
@@ -139,10 +136,6 @@ barba.init({
             loaderAway();
         }
     }]
-});
-
-barba.hooks.enter(() => {
-    window.scrollTo(0, 0);
 });
 
 gsap.set(loader, {

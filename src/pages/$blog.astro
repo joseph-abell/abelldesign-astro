@@ -76,9 +76,7 @@ const { html } = content;
     <script src="https://unpkg.com/@barba/core"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
-<body>
-<div data-barba="wrapper">
-<div data-barba="container">
+<body data-barba="wrapper">
     <WhiteBackground>
         <Header client:load {header} {menu} />
 
@@ -130,9 +128,6 @@ const { html } = content;
 
     <Footer footer={footer} />
     <ScreenTransition />
-
-</div>
-</div>
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -184,10 +179,6 @@ function loaderAway() {
             loaderAway();
         }
     }]
-});
-
-barba.hooks.enter(() => {
-    window.scrollTo(0, 0);
 });
 
 gsap.set(loader, {

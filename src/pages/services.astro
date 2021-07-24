@@ -51,7 +51,6 @@ const quoter = servicesPages[0].quoter;
 </head>
 <body>
 <div data-barba="wrapper">
-<div data-barba="container">
     <WhiteBackground>
         <Header client:load {header} {menu} />
 
@@ -62,7 +61,6 @@ const quoter = servicesPages[0].quoter;
     </WhiteBackground>
 
     <Footer footer={footer} />
-</div>
 </div>
 
     <ScreenTransition />
@@ -107,8 +105,8 @@ function loaderAway() {
         ease: 'power4.inOut'
     });
 }
+    barba.init({
 
-barba.init({
     transitions: [{
         async leave() {
             await loaderIn();
@@ -117,10 +115,6 @@ barba.init({
             loaderAway();
         }
     }]
-});
-
-barba.hooks.enter(() => {
-    window.scrollTo(0, 0);
 });
 
 gsap.set(loader, {

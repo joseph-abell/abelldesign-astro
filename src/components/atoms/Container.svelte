@@ -1,4 +1,4 @@
-<article class:isHome>
+<article class:isHome data-barba="container">
 	<slot />
 </article>
 
