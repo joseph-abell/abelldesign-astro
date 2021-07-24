@@ -6,6 +6,7 @@ import Container from '../components/atoms/Container.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import H2 from '../components/atoms/H2.svelte';
 import Quote from '../components/molecules/Quote.svelte';
+import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -53,6 +54,13 @@ const { html } = content;
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="/style/global.css">
     <style>
+        .blog-list-item {
+            margin-bottom: 40px;
+        }
+        .blog-list-item p {
+            color: #b40808;
+        }
+
         @media (min-width: 768px) {
             .blog-list {
                 display: flex;
@@ -124,6 +132,8 @@ const { html } = content;
     </WhiteBackground>
 
     <Footer footer={footer} />
+    <ScreenTransition />
+
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

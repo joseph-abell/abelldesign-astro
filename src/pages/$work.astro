@@ -11,6 +11,7 @@ import WorkMain from '../components/atoms/WorkMain.svelte';
 import Quote from '../components/molecules/Quote.svelte';
 import List from '../components/molecules/List.svelte';
 import MoreWork from '../components/atoms/MoreWork.svelte';
+import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -131,6 +132,7 @@ export async function createCollection() {
     </WhiteBackground>
 
     <Footer footer={footer} />
+    <ScreenTransition />
 
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

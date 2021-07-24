@@ -5,8 +5,7 @@ import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
 import Container from '../components/atoms/Container.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import A from '../components/atoms/A.svelte';
-// import Map from '../components/atoms/Map.svelte';
-// import MapMarker from '../components/atoms/MapMarker.svelte';
+import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -155,6 +154,7 @@ let {
     </WhiteBackground>
 
     <Footer footer={footer} />
+    <ScreenTransition />
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
