@@ -6,7 +6,6 @@ import Container from '../components/atoms/Container.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import H2 from '../components/atoms/H2.svelte';
 import Quote from '../components/molecules/Quote.svelte';
-import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -54,12 +53,6 @@ const { html } = content;
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="/style/global.css">
     <style>
-        .blog-list-item {
-            margin-bottom: 40px;
-        }
-        .blog-list-item p {
-            color: #b40808;
-        }
         @media (min-width: 768px) {
             .blog-list {
                 display: flex;
@@ -72,11 +65,15 @@ const { html } = content;
                 padding: 20px;
             }
         }
+        .blog-list-item {
+            margin-bottom: 40px;
+        }
+        .blog-list-item p {
+            color: #b40808;
+        }
     </style>
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
-<body data-barba="wrapper">
+<body>
     <WhiteBackground>
         <Header client:load {header} {menu} />
 
@@ -127,7 +124,6 @@ const { html } = content;
     </WhiteBackground>
 
     <Footer footer={footer} />
-    <ScreenTransition />
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -137,57 +133,5 @@ const { html } = content;
         ga('create', 'UA-102804990-2', 'auto');
         ga('send', 'pageview');
     </script>
-
-    <script>
-    const loader = document.querySelector('.loader');
-    function loaderIn() {
-    // GSAP tween to stretch the loading screen across the whole screen
-    return gsap.fromTo(loader,
-        {
-            rotation: 10,
-            scaleX: 0,
-            xPercent: -5
-        },
-        {
-            duration: 0.4,
-            xPercent: 0,
-            scaleX: 1,
-            rotation: 0,
-            ease: 'power4.inOut',
-            transformOrigin: 'left center'
-        });
-}
-
-function loaderAway() {
-    // GSAP tween to hide loading screen
-    return gsap.to(loader, {
-        duration: 0.4,
-        scaleX: 0,
-        xPercent: 5,
-        rotation: -10,
-        transformOrigin: 'right center',
-        ease: 'power4.inOut'
-    });
-}
-    
-    barba.init({
-    transitions: [{
-        async leave() {
-            // await loaderIn();
-        },
-        enter() {
-            loaderAway();
-        }
-    }]
-});
-
-gsap.set(loader, {
-    scaleX: 0,
-    rotation: 10,
-    xPercent: -5,
-    yPercent: -50,
-    transformOrigin: 'left center',
-    autoAlpha: 1
-});</script>
 </body>
 </html>

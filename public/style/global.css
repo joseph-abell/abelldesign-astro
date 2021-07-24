@@ -84,7 +84,6 @@ html, body {
     font-family: 'Libre Baskerville', serif;
     color: rgba(0, 0, 0, 0.9);
     overflow-x: hidden;
-    position: relative;
 }
 
 a {
