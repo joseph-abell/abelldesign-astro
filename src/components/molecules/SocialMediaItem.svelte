@@ -7,7 +7,7 @@
 	export let alt = '';
 </script>
 
-<li>
+<li class="social-media-item-molecule">
 	{#if !!link}
 		<a href={link}>
 			<div class="imageContainer">
@@ -28,22 +28,3 @@
 		</div>
 	{/if}
 </li>
-
-<style>
-	li {
-		padding: 10px 0;
-		list-style: none;
-	}
-	a,
-	.flex {
-		color: white;
-		display: flex;
-		flex-flow: start;
-		align-items: center;
-		text-decoration: none;
-	}
-	.imageContainer {
-		width: 24px;
-		margin-right: 20px;
-	}
-</style>

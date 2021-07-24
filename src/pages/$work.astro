@@ -3,7 +3,6 @@ import Header from '../components/molecules/Header.svelte';
 import Footer from '../components/molecules/Footer.svelte';
 import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
 import Container from '../components/atoms/Container.svelte';
-import WorkImage from '../components/atoms/WorkImage.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import WorkPrimaryImages from '../components/atoms/WorkPrimaryImages.svelte';
 import WorkPrimaryImage from '../components/atoms/WorkPrimaryImage.svelte';
@@ -108,9 +107,10 @@ export async function createCollection() {
                     <WorkMain>
                         <p class="subtitle">{work.subtitle}</p>
                         <div class="markdown">
-                            {work?.content?.html}
+                            {work?.content?.html || ''}
                         </div>
-                        {work?.quote?.length > 0 && (
+
+                        {work && work.quote && work.quote.length && work.quote.length > 0 && (
                             <Quote quote={work.quote} quoter={work.quoteAuthor} />
                         )}
                         <WorkPrimaryImages>

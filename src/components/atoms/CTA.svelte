@@ -62,84 +62,11 @@
     </svg>
     </a>
     
-
     <div class="deck">
         <p class="title">{title}</p>
         <p class="subtitle">{subtitle}</p>
     </div>
 </div>
-
-<style>
-    .cta {
-        width: 100vw;
-        height: 100vh;
-        background: url("/assets/cta.jpg") no-repeat center center fixed; 
-        background-size: cover;
-        color: white;
-        position: relative;
-        padding-top: 100px;
-    }
-
-    svg {
-        width: 200px;
-        display: block;
-        top: 60px;
-        position: absolute;
-        left: 40px;
-        filter: drop-shadow(2px 2px 2px rgb(0 0 0 / 0.4));
-    }
-    p {
-        text-shadow: 2px 2px rgb(0 0 0 / 0.8);
-        font-size: 30px;
-    }
-
-    .deck {
-        position: absolute;
-        bottom: 40px;
-        left: 40px;
-        width: 60vw;
-    }
-
-    .deck .title {
-        font-size: 40px;
-        margin-bottom: 10px;
-    }
-
-    @media (max-width: 767px) {
-        .cta {
-            height: auto;
-            background: #ffffef;
-            text-shadow: none;
-            color: #000000;
-            padding: 0;
-            margin-top: 90px;
-        }
-
-        svg {
-            display: none;
-        }
-
-        .deck {
-            position: static;
-            padding: 40px 0 0 40px;
-            text-align: left;
-        }
-
-        .deck {
-            width: 80vw;
-        }
-
-        .deck .title {
-            font-size: 30px;
-            line-height: 40px;
-        }
-
-        p {
-            font-size: 20px;
-            text-shadow: none;
-        }
-    }
-</style>
 
 <script>
     export let title;

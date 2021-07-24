@@ -53,32 +53,12 @@ const { html } = content;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="/style/global.css">
-    <style>
-        .blog-list-item {
-            margin-bottom: 40px;
-        }
-        .blog-list-item p {
-            color: #b40808;
-        }
-        @media (min-width: 768px) {
-            .blog-list {
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-            }
-
-            .blog-list-item {
-                width: 30%;
-                padding: 20px;
-            }
-        }
-    </style>
     <script src="https://unpkg.com/@barba/core"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 </head>
 <body>
 <div data-barba="wrapper">
-<div data-barba="container">
+<div data-barba="container" class="blog-page">
     <WhiteBackground>
         <Header client:load {header} {menu} />
 

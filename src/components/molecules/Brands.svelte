@@ -17,22 +17,3 @@
 		{/each}
 	</ul>
 </div>
-
-<style>
-	.brand-list {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-		display: grid;
-		justify-items: stretch;
-		align-items: stretch;
-		grid-template-columns: 1fr 1fr 1fr;
-		column-gap: 40px;
-		row-gap: 40px;
-		margin-bottom: 30px;
-	}
-
-    .brand-list div {
-        height: 100%;
-    }
-</style>
