@@ -47,157 +47,190 @@ let {
 	} = contacts[0];
 ---
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{siteTitle}</title>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
-        <link rel="stylesheet" href="/style/global.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{siteTitle}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="/style/global.css">
+    <script>
+    function initMap() {
+        const theDrey = { lat: 53.9524713, lng: -1.0714173 };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 16,
+          center: theDrey,
+        });
+        // The marker, positioned at Uluru
+        const marker = new google.maps.Marker({
+          position: theDrey,
+          map: map,
+        });
+      }
 
-        <style>
-        
-        </style>
-        <script src="https://unpkg.com/@barba/core" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js" />
-    </head>
-    <body>
-        <div data-barba='wrapper'>
-            <div data-barba='container' class="contact-page">
-                <WhiteBackground>
-                    <Header client:load {header} {menu} />
+    </script>
 
-                    <Container>
-                        <ListH1>{title}</ListH1>
-                        <div class="contact-container" itemscope itemtype="https://schema.org/LocalBusiness">
-                            <ul>
-                                <li class="contact">
-                                    <div class="image">
-                                        <img src={emailImage.url} alt="" />
-                                    </div>
-                                    <div class="text">
-                                        {emailTitle} {" "}
-                                        <A href={emailLink} itemprop="email">{emailLinkText}</A>
-                                    </div>
-                                </li>
-                                <li class="contact">
-                                    <div class="image">
-                                        <img src={phoneImage.url} alt="" />
-                                    </div>
-                                    <div class="text" itemprop="telephone">
-                                        {phoneText}
-                                    </div>
-                                </li>
-                                <li class="contact">
-                                    <div class="image">
-                                        <img src={addressImage.url} alt="" />
-                                    </div>
-                                    <div class="text" itemprop="address">
-                                        {address}
-                                    </div>
-                                </li>
-                                <li class="contact">
-                                    <div class="image">
-                                        <img src={linkedInImage.url} alt="" />
-                                    </div>
-                                    <div class="text">
-                                        <A href={linkedInLink}>{linkedInLinkText}</A>
-                                    </div>
-                                </li>
-                                <li class="contact">
-                                    <div class="image">
-                                        <img src={instagramImage.url} alt="" />
-                                    </div>
-                                    <div class="text">
-                                        <A href={instagramLink}>{instagramLinkText}</A>
-                                    </div>
-                                </li>
-                            </ul>
+    <style>
+        li.contact {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: center;
+        }
 
-                            <div id="map" itemscope itemtype="https://schema.org/Map">
-                                <a href="https://www.google.com/maps/place/Abell+Design/@53.95251,-1.0736046,17z/data=!3m1!4b1!4m5!3m4!1s0x487931d1fc153b87:0x7259996aec7be18e!8m2!3d53.9525048!4d-1.0714177"><img src="/assets/map.png" alt="Map showing office location" /></a>
-                            </div>
+        .image {
+            margin-right: 20px;
+        }
 
-                        </div>
-                    </Container>
-                </WhiteBackground>
+        .contact-container {
+            margin-bottom: 40px;
+        }
 
-                <Footer footer={footer} />
-                
-                <script>
-                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-                    ga('create', 'UA-102804990-2', 'auto');
-                    ga('send', 'pageview');
-                </script>
-            </div>
-        </div>
-        <ScreenTransition />
-            
-        <script>
-            const loader = document.querySelector('.loader');
-            function loaderIn() {
-                // GSAP tween to stretch the loading screen across the whole screen
-                return gsap.fromTo(
-                    loader,
-                    {
-                        rotation: 10,
-                        scaleX: 0,
-                        xPercent: -5
-                    },
-                    {
-                        duration: 0.4,
-                        xPercent: 0,
-                        scaleX: 1,
-                        rotation: 0,
-                        ease: 'power4.inOut',
-                        transformOrigin: 'left center'
-                    }
-                );
+        img {
+            width: 24px;
+        }
+        @media (min-width: 768px) {
+            .contact-container {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-column-gap: 20px;
             }
+        }
+    </style>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+</head>
+<body>
+<div data-barba='wrapper'>
+<div data-barba='container'>
+    <WhiteBackground>
+        <Header client:load {header} {menu} />
 
-            function loaderAway() {
-                // GSAP tween to hide loading screen
-                return gsap.to(
-                    loader, 
-                    {
-                        duration: 0.4,
-                        scaleX: 0,
-                        xPercent: 5,
-                        rotation: -10,
-                        transformOrigin: 'right center',
-                        ease: 'power4.inOut'
-                    }
-                );
-            }
-            barba.init({
-                transitions: [{
-                    async leave() {
-                        await loaderIn();
-                    },
-                    enter() {
-                        loaderAway();
-                    }
-                }]
-            });
+        <Container>
+	<ListH1>{title}</ListH1>
+	<div class="contact-container" itemscope itemtype="https://schema.org/LocalBusiness">
+		<ul>
+			<li class="contact">
+				<div class="image">
+					<img src={emailImage.url} alt="" />
+				</div>
+				<div class="text">
+					{emailTitle} {" "}
+					<A href={emailLink} itemprop="email">{emailLinkText}</A>
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={phoneImage.url} alt="" />
+				</div>
+				<div class="text" itemprop="telephone">
+					{phoneText}
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={addressImage.url} alt="" />
+				</div>
+				<div class="text" itemprop="address">
+					{address}
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={linkedInImage.url} alt="" />
+				</div>
+				<div class="text">
+					<A href={linkedInLink}>{linkedInLinkText}</A>
+				</div>
+			</li>
+			<li class="contact">
+				<div class="image">
+					<img src={instagramImage.url} alt="" />
+				</div>
+				<div class="text">
+					<A href={instagramLink}>{instagramLinkText}</A>
+				</div>
+			</li>
+		</ul>
 
-            barba.hooks.enter(() => {
-                window.scrollTo(0, 0);
-            });
+        <div id="map" itemscope itemtype="https://schema.org/Map"></div>
+	</div>
+        </Container>
+    </WhiteBackground>
 
-            gsap.set(loader, {
-                scaleX: 0,
-                rotation: 10,
-                xPercent: -5,
-                yPercent: -50,
-                transformOrigin: 'left center',
-                autoAlpha: 1
-            });
-        </script>
-    </body>
+    <Footer footer={footer} />
+</div>
+
+    </div>
+<ScreenTransition />
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-102804990-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script>
+    const loader = document.querySelector('.loader');
+function loaderIn() {
+    // GSAP tween to stretch the loading screen across the whole screen
+    return gsap.fromTo(loader,
+        {
+            rotation: 10,
+            scaleX: 0,
+            xPercent: -5
+        },
+        {
+            duration: 0.4,
+            xPercent: 0,
+            scaleX: 1,
+            rotation: 0,
+            ease: 'power4.inOut',
+            transformOrigin: 'left center'
+        });
+}
+
+function loaderAway() {
+    // GSAP tween to hide loading screen
+    return gsap.to(loader, {
+        duration: 0.4,
+        scaleX: 0,
+        xPercent: 5,
+        rotation: -10,
+        transformOrigin: 'right center',
+        ease: 'power4.inOut'
+    });
+}
+barba.init({
+    transitions: [{
+        async leave() {
+            await loaderIn();
+        },
+        enter() {
+            loaderAway();
+        }
+    }]
+});
+
+barba.hooks.enter(() => {
+    window.scrollTo(0, 0);
+});
+
+gsap.set(loader, {
+    scaleX: 0,
+    rotation: 10,
+    xPercent: -5,
+    yPercent: -50,
+    transformOrigin: 'left center',
+    autoAlpha: 1
+});</script>
+</body>
 </html>

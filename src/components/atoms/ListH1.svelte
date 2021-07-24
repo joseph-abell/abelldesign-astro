@@ -3,4 +3,14 @@
     export let itemprop;
 </script>
 
-<h1 {style} itemprop={itemprop} class="list-h1"><slot /></h1>
+<h1 {style} itemprop={itemprop}><slot /></h1>
+
+<style>
+	h1 {
+		font-size: 24px;
+		line-height: 30px;
+		color: #16688c;
+		text-align: center;
+		margin: 20px 0 40px;
+	}
+</style>

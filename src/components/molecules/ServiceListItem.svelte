@@ -5,7 +5,7 @@
 	export let item;
 </script>
 
-<li class="service-list-item-molecule">
+<li>
 	<div class="data-item-text">
 		<H3>{item.title}</H3>
 		<P>{item.featuredDeck}</P>
@@ -20,3 +20,11 @@
 		</div>
 	{/if}
 </li>
+
+<style>
+	@media (min-width: 768px) {
+		.data-item-text {
+			flex-grow: 1;
+		}
+	}
+</style>

@@ -9,7 +9,7 @@
 	export let works;
 </script>
 
-<div class="work-molecule">
+<div>
 	<H2>Work</H2>
 
 	<ContentList>
@@ -30,3 +30,29 @@
 
 	<CenteredLink href="/work">More Work</CenteredLink>
 </div>
+
+<style>
+	.work-link {
+		display: flex;
+		justify-content: stretch;
+		align-content: stretch;
+		margin-bottom: 20px;
+	}
+
+	.work-link.even {
+		flex-direction: row-reverse;
+	}
+
+	.work-text {
+		width: calc(100% - 170px);
+		margin-right: 20px;
+		margin-left: 0;
+		height: 150px;
+	}
+
+	.work-text.even {
+		margin-left: 20px;
+		margin-right: 0;
+		width: calc(100% - 170px);
+	}
+</style>
