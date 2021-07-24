@@ -1,14 +1,10 @@
 ---
-import CTA from '../components/atoms/CTA.svelte';
-import Header from '../components/molecules/Header.svelte';
-import Footer from '../components/molecules/Footer.svelte';
-import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import Layout from '../layouts/mainLayout.svelte';
 import Container from '../components/atoms/Container.svelte';
-import Quote from '../components/molecules/Quote.svelte';
-import List from '../components/molecules/List.svelte';
 import Services from '../components/molecules/Services.svelte';
+import List from '../components/molecules/List.svelte';
 import Brands from '../components/molecules/Brands.svelte';
-import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
+import Quote from '../components/molecules/Quote.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -16,10 +12,7 @@ import homeQuery from '../queries/home';
 
 let title = 'Abell Design';
 const siteData = await fetchData(fetch, siteQuery);
-const { headers, footers } = siteData;
-let { menu } = siteData;
-
-menu = menu.sort((a, b) => a.order - b.order);
+const { headers, footers, menu } = siteData;
 
 const header = headers[0];
 const footer = footers[0];
@@ -55,41 +48,19 @@ if (data && data.services) {
 const { works, services, homepage, brands } = data;
 
 ---
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="/style/global.css">
-
-    <style>
-    .hidden {
-        position: absolute;
-        left: -100vw;
-    }
-    </style>
-</head>
-<body itemscope itemtype="https://schema.org/LocalBusiness">
-    <p class="hidden" itemprop="name">Abell Design</p>
-    <WhiteBackground>
-        <div class="header-container">
-            <CTA title={homepage[0].title} subtitle={homepage[0].subtitle} />
-            <Header client:load {header} {menu} isHome={true} />
-        </div>
-
-        <Container isHome={true}>
-            <Services title="Services" data={services} slugPrefix="/work" linkText="More Services" />
-            <List title="Work" data={works} slugPrefix="/work" linkText="More Work" />
-            <Brands {brands} brandsText={homepage[0].brandsText} />
-            <Quote quote={homepage[0].quote} quoter={homepage[0].quoter} />
-        </Container>
-    </WhiteBackground>
-
-    <Footer footer={footer} />
-    <ScreenTransition />
-</body>
-</html>
+<Layout
+    title={title}
+    menu={menu}
+    header={header}
+    footer={footer}
+    isHome={true}
+    client:load
+    homepage={homepage[0]}
+>
+    <Container isHome={true}>
+        <Services title="Services" data={services} slugPrefix="/work" linkText="More Services" />
+        <List title="Work" data={works} slugPrefix="/work" linkText="More Work" />
+        <Brands {brands} brandsText={homepage[0].brandsText} />
+        <Quote quote={homepage[0].quote} quoter={homepage[0].quoter} />
+    </Container>
+</Layout>

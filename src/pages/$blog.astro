@@ -1,12 +1,9 @@
 ---
-import Header from '../components/molecules/Header.svelte';
-import Footer from '../components/molecules/Footer.svelte';
-import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import Layout from '../layouts/mainLayout.svelte';
 import Container from '../components/atoms/Container.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import H2 from '../components/atoms/H2.svelte';
 import Quote from '../components/molecules/Quote.svelte';
-import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -43,105 +40,83 @@ const {title, image, subtitle, content = {html: ''}, quote, quoter} = collection
 const blogs = collection.data[0].blogs?.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
 const { html } = content;
 ---
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{title || 'Blog'} - Abell Design</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="/style/global.css">
-    <style>
+<style>
+    .blog-list-item {
+        margin-bottom: 40px;
+    }
+    .blog-list-item p {
+        color: #b40808;
+    }
+
+    @media (min-width: 768px) {
+        .blog-list {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
         .blog-list-item {
-            margin-bottom: 40px;
+            width: 30%;
+            padding: 20px;
         }
-        .blog-list-item p {
-            color: #b40808;
-        }
+    }
+    .blog-list-item {
+        margin-bottom: 40px;
+    }
+    .blog-list-item p {
+        color: #b40808;
+    }
+</style>
 
-        @media (min-width: 768px) {
-            .blog-list {
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-            }
-
-            .blog-list-item {
-                width: 30%;
-                padding: 20px;
-            }
-        }
-        .blog-list-item {
-            margin-bottom: 40px;
-        }
-        .blog-list-item p {
-            color: #b40808;
-        }
-    </style>
-</head>
-<body>
-    <WhiteBackground>
-        <Header client:load {header} {menu} />
-
-        <Container>
-            {title && (
-                <div itemtype="https://schema.org/BlogPosting">
-                    <ListH1 itemprop="headline">{title}</ListH1>
-                    {image && (
-                        <div style="display: flex; align-items: center; justify-content: center;">
-                            <img src={image.url} alt="" itemprop="image" />
-                        </div>
-                    )}
-                    <div itemprop="articleBody">
-                    <H2>{subtitle}</H2>
-                    <div class="html">
-                        {html}
+<Layout
+    title={`${title || 'Blog'} - Abell Design`}
+    menu={menu}
+    header={header}
+    footer={footer}
+    isHome={false}
+>
+    <Container>
+        {title && (
+            <div itemtype="https://schema.org/BlogPosting">
+                <ListH1 itemprop="headline">{title}</ListH1>
+                {image && (
+                    <div style="display: flex; align-items: center; justify-content: center;">
+                        <img src={image.url} alt="" itemprop="image" />
                     </div>
-                    {quote && (
-                        <Quote quote={quote} quoter={quoter} />
-                    )}
-                    </div>
-                    
+                )}
+                <div itemprop="articleBody">
+                <H2>{subtitle}</H2>
+                <div class="html">
+                    {html}
                 </div>
-            )}
+                {quote && (
+                    <Quote quote={quote} quoter={quoter} />
+                )}
+                </div>
+                
+            </div>
+        )}
 
-            {blogs && (
-                <>
-                    <ListH1>Blog</ListH1>
+        {blogs && (
+            <>
+                <ListH1>Blog</ListH1>
 
-                    <ul class="blog-list" itemscope itemtype="https://schema.org/Blog">
-                        {blogs.map((blog) => (
-                            <li class="blog-list-item">
-                                <a href={`/blog/${blog.slug}`} itemprop="url">
-                                    <div style="height: 200px; overflow: hidden;">
-                                        <div style="display: flex; align-items: center; justify-content: center;">
-                                            <img src={blog.featuredImage.url} alt="" itemprop="image" />
-                                        </div>
+                <ul class="blog-list" itemscope itemtype="https://schema.org/Blog">
+                    {blogs.map((blog) => (
+                        <li class="blog-list-item">
+                            <a href={`/blog/${blog.slug}`} itemprop="url">
+                                <div style="height: 200px; overflow: hidden;">
+                                    <div style="display: flex; align-items: center; justify-content: center;">
+                                        <img src={blog.featuredImage.url} alt="" itemprop="image" />
                                     </div>
+                                </div>
 
-                                    <H2 style="text-align: left;">{blog.title}</H2>
-                                </a>
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )}
-        </Container>
-    </WhiteBackground>
-
-    <Footer footer={footer} />
-    <ScreenTransition />
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-102804990-2', 'auto');
-        ga('send', 'pageview');
-    </script>
-</body>
-</html>
+                                <H2 style="text-align: left;">{blog.title}</H2>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </>
+        )}
+    </Container>
+</Layout>

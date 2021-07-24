@@ -1,6 +1,8 @@
 <script>
 	export let menu;
 	export let menuOpen;
+
+	console.log('menu from menu', menu);
 </script>
 
 <menu class:menuOpen>

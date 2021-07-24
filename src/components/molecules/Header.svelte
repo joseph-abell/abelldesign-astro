@@ -4,6 +4,7 @@
 
 	export let header = { image: { url: '', height: '' } };
 	export let menu = [{}];
+	console.log(menu);
     export let isHome = false;
 
 	let src = header.image.url;
@@ -15,7 +16,7 @@
 <div class="header-container">
 	<header class:isHome id="article">
 		<div>
-			<a href={`${menu[0].slug}#article`}>
+			<a href={`${menu?.[0]?.slug}#article`}>
 				<img {alt} {src} itemprop="logo" />
 			</a>
 		</div>

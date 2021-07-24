@@ -1,4 +1,5 @@
 ---
+import Layout from '../layouts/mainLayout.svelte';
 import Header from '../components/molecules/Header.svelte';
 import Footer from '../components/molecules/Footer.svelte';
 import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
@@ -74,74 +75,51 @@ export async function createCollection() {
     };
 }
 ---
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{work?.title || "Work"} - Abell Design</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="/style/global.css">
-</head>
-<body>
-    <WhiteBackground>
-        <Header client:load {header} {menu} />
+<Layout
+    title={`${work?.title || "Work"} - Abell Design`}
+    menu={menu}
+    header={header}
+    footer={footer}
+    isHome={false}
+>
+    <Container>
+        {work.title && (
+            <div itemscope itemtype="https://schema.org/Service">
+                <ListH1 itemprop="name">{work.title}</ListH1>
+                <WorkPrimaryImages>
+                    {(work.images || []).map(image => (
+                        <WorkPrimaryImage>
+                            <img src={image.url} alt='' itemprop="image" />
+                        </WorkPrimaryImage>
+                    ))}
+                </WorkPrimaryImages>
 
-        <Container>
-            {work.title && (
-                <div itemscope itemtype="https://schema.org/Service">
-                    <ListH1 itemprop="name">{work.title}</ListH1>
+                <WorkMain>
+                    <p class="subtitle">{work.subtitle}</p>
+                    <div class="markdown">
+                        {work?.content?.html}
+                    </div>
+                    {work?.quote?.length > 0 && (
+                        <Quote quote={work.quote} quoter={work.quoteAuthor} />
+                    )}
                     <WorkPrimaryImages>
-                        {(work.images || []).map(image => (
-                            <WorkPrimaryImage>
-                                <img src={image.url} alt='' itemprop="image" />
-                            </WorkPrimaryImage>
-                        ))}
+                    {(work.secondaryImages || []).map(image => (
+                        <WorkPrimaryImage>
+                            <img src={image.url} alt='' />
+                        </WorkPrimaryImage>
+                    ))}
                     </WorkPrimaryImages>
+                    <MoreWork {next} />
+                </WorkMain>
+            </div>
+        )}
 
-                    <WorkMain>
-                        <p class="subtitle">{work.subtitle}</p>
-                        <div class="markdown">
-                            {work?.content?.html}
-                        </div>
-                        {work?.quote?.length > 0 && (
-                            <Quote quote={work.quote} quoter={work.quoteAuthor} />
-                        )}
-                        <WorkPrimaryImages>
-                        {(work.secondaryImages || []).map(image => (
-                            <WorkPrimaryImage>
-                                <img src={image.url} alt='' />
-                            </WorkPrimaryImage>
-                        ))}
-                        </WorkPrimaryImages>
-                        <MoreWork {next} />
-                    </WorkMain>
-                </div>
-            )}
+        {works && (
+            <>
+                <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
 
-            {works && (
-                <>
-                    <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
-
-                    <Quote quote={quote} quoter={quoter} />
-                </>
-            )}
-        </Container>
-    </WhiteBackground>
-
-    <Footer footer={footer} />
-    <ScreenTransition />
-
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-102804990-2', 'auto');
-        ga('send', 'pageview');
-    </script>
-</body>
-</html>
+                <Quote quote={quote} quoter={quoter} />
+            </>
+        )}
+    </Container>
+</Layout>
