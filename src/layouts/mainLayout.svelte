@@ -1,23 +1,6 @@
 <script>
-    import Header from '../components/molecules/Header.svelte';
-    import Footer from '../components/molecules/Footer.svelte';
-    import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
-    import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
-    import CTA from '../components/atoms/CTA.svelte';
-
-    export let title, menu, header, footer, isHome, homepage;
-
-    menu = (menu || []).sort((a, b) => a.order - b.order);
-
-
+    export let title;
 </script>
-
-<style>
-    .hidden {
-        position: absolute;
-        left: -100vw;
-    }
-</style>
 
 <html lang="en">
 <head>
@@ -31,20 +14,11 @@
     <link rel="stylesheet" href="/style/global.css">
 </head>
 <body itemscope itemtype="https://schema.org/LocalBusiness">
-    <p class="hidden" itemprop="name">Abell Design</p>
-    <WhiteBackground>
-        <div class="header-container">
-            {#if homepage}
-                <CTA title={homepage.title} subtitle={homepage.subtitle} />
-            {/if}
-            <Header {header} {menu} isHome={isHome} />
-        </div>
+    <slot />
 
-        <slot />
-
-    </WhiteBackground>
-
-    <Footer footer={footer} />
-    <ScreenTransition />
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
+        async
+    />
 </body>
 </html>

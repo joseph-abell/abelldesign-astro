@@ -3,6 +3,10 @@ import Layout from '../layouts/mainLayout.svelte';
 import Container from '../components/atoms/Container.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import A from '../components/atoms/A.svelte';
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -41,93 +45,72 @@ let {
 		mapZoom
 	} = contacts[0];
 ---
-<style>
-    li.contact {
-        display: flex;
-        margin-bottom: 20px;
-        align-items: center;
-    }
-
-    .image {
-        margin-right: 20px;
-    }
-
-    .contact-container {
-        margin-bottom: 40px;
-    }
-
-    img {
-        width: 24px;
-    }
-    @media (min-width: 768px) {
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-column-gap: 20px;
-        }
-    }
-</style>
 
 <Layout
     title={siteTitle}
-    menu={menu}
-    header={header}
-    footer={footer}
-    isHome={false}
+    client:load
 >
-    <div id="swup">
-    <Container>
-        <ListH1>{title}</ListH1>
-        <div class="contact-container" itemscope itemtype="https://schema.org/LocalBusiness">
-            <ul>
-                <li class="contact">
-                    <div class="image">
-                        <img src={emailImage.url} alt="" />
-                    </div>
-                    <div class="text">
-                        {emailTitle} {" "}
-                        <A href={emailLink} itemprop="email">{emailLinkText}</A>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="image">
-                        <img src={phoneImage.url} alt="" />
-                    </div>
-                    <div class="text" itemprop="telephone">
-                        {phoneText}
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="image">
-                        <img src={addressImage.url} alt="" />
-                    </div>
-                    <div class="text" itemprop="address">
-                        {address}
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="image">
-                        <img src={linkedInImage.url} alt="" />
-                    </div>
-                    <div class="text">
-                        <A href={linkedInLink}>{linkedInLinkText}</A>
-                    </div>
-                </li>
-                <li class="contact">
-                    <div class="image">
-                        <img src={instagramImage.url} alt="" />
-                    </div>
-                    <div class="text">
-                        <A href={instagramLink}>{instagramLinkText}</A>
-                    </div>
-                </li>
-            </ul>
+    <div id="swup" class="contact-page">
+        <p class="hidden" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
+            </div>
+        <Container>
+            <ListH1>{title}</ListH1>
+            <div class="contact-container" itemscope itemtype="https://schema.org/LocalBusiness">
+                <ul>
+                    <li class="contact">
+                        <div class="image">
+                            <img src={emailImage.url} alt="" />
+                        </div>
+                        <div class="text">
+                            {emailTitle} {" "}
+                            <A href={emailLink} itemprop="email">{emailLinkText}</A>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="image">
+                            <img src={phoneImage.url} alt="" />
+                        </div>
+                        <div class="text" itemprop="telephone">
+                            {phoneText}
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="image">
+                            <img src={addressImage.url} alt="" />
+                        </div>
+                        <div class="text" itemprop="address">
+                            {address}
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="image">
+                            <img src={linkedInImage.url} alt="" />
+                        </div>
+                        <div class="text">
+                            <A href={linkedInLink}>{linkedInLinkText}</A>
+                        </div>
+                    </li>
+                    <li class="contact">
+                        <div class="image">
+                            <img src={instagramImage.url} alt="" />
+                        </div>
+                        <div class="text">
+                            <A href={instagramLink}>{instagramLinkText}</A>
+                        </div>
+                    </li>
+                </ul>
 
-            <div id="map" itemscope itemtype="https://schema.org/Map"></div>
-        </div>
-    </Container>
+                <div id="map" itemscope itemtype="https://schema.org/Map"></div>
+            </div>
+        </Container>
+                </WhiteBackground>
+        <Footer footer={footer} />
+        <ScreenTransition />
     </div>
-    
+
     <script>
         function initMap() {
             const theDrey = { lat: 53.9524713, lng: -1.0714173 };
@@ -141,9 +124,5 @@ let {
             });
         }
     </script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
-        async
-    />
-    <script type="module" src="/app.js" />
-</Layout>
+    <script type="module" src="/app.js" />   
+</Layout> 

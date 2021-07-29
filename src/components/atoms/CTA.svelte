@@ -1,5 +1,5 @@
 <div class="cta">
-    <a href="/#article">
+    <a href="">
         <svg
         version="1.1"
         id="Layer_1"

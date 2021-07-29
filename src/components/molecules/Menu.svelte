@@ -1,15 +1,13 @@
 <script>
 	export let menu;
 	export let menuOpen;
-
-	console.log('menu from menu', menu);
 </script>
 
 <menu class:menuOpen>
 	<ul>
 		{#each menu as menuItem (menuItem.slug)}
 			<li>
-				<a href={`${menuItem.slug.length > 1 ? `/${menuItem.slug}` : `${menuItem.slug}#article`}`}>
+				<a href={`${menuItem.slug.length > 1 ? `/${menuItem.slug}` : `${menuItem.slug}`}`}>
 					{menuItem.text}
                 </a>
 			</li>

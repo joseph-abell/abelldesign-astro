@@ -3,6 +3,10 @@ import Layout from '../layouts/mainLayout.svelte';
 import Container from '../components/atoms/Container.svelte';
 import Services from '../components/molecules/Services.svelte';
 import Quote from '../components/molecules/Quote.svelte';
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -14,6 +18,7 @@ const header = headers[0];
 const footer = footers[0];
 
 let { menu } = siteData;
+menu = (menu || []).sort((a, b) => a.order - b.order);
 let title = 'Services - Abell Design';
 
 const data = (await fetchData(fetch, query)) || { services: [], servicesPages: [{}] };
@@ -33,18 +38,22 @@ const quoter = servicesPages[0].quoter;
 ---
 <Layout
     title={title}
-    menu={menu}
-    header={header}
-    footer={footer}
-    isHome={false}
+    client:load
 >
     <div id="swup">
+        <p class="hidden" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
+            </div>
+
         <Container>
             <Services title="Services" data={services} slugPrefix="/work" linkText="" />
             <Quote {quote} {quoter} />
         </Container>
+        </WhiteBackground>
+        <Footer footer={footer} />
+        <ScreenTransition />
     </div>
-    
-
     <script type="module" src="/app.js" />
 </Layout>

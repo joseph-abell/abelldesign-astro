@@ -4,6 +4,11 @@ import Container from '../components/atoms/Container.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import H2 from '../components/atoms/H2.svelte';
 import Quote from '../components/molecules/Quote.svelte';
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
+import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
+import CTA from '../components/atoms/CTA.svelte';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -40,86 +45,62 @@ const {title, image, subtitle, content = {html: ''}, quote, quoter} = collection
 const blogs = collection.data[0].blogs?.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
 const { html } = content;
 ---
-<style>
-    .blog-list-item {
-        margin-bottom: 40px;
-    }
-    .blog-list-item p {
-        color: #b40808;
-    }
-
-    @media (min-width: 768px) {
-        .blog-list {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .blog-list-item {
-            width: 30%;
-            padding: 20px;
-        }
-    }
-    .blog-list-item {
-        margin-bottom: 40px;
-    }
-    .blog-list-item p {
-        color: #b40808;
-    }
-</style>
-
-<Layout
-    title={`${title || 'Blog'} - Abell Design`}
-    menu={menu}
-    header={header}
-    footer={footer}
-    isHome={false}
->
+<Layout title={`${title || 'Blog'} - Abell Design`} client:load>
     <div id="swup">
-    <Container>
-        {title && (
-            <div itemtype="https://schema.org/BlogPosting">
-                <ListH1 itemprop="headline">{title}</ListH1>
-                {image && (
-                    <div style="display: flex; align-items: center; justify-content: center;">
-                        <img src={image.url} alt="" itemprop="image" />
-                    </div>
-                )}
-                <div itemprop="articleBody">
-                <H2>{subtitle}</H2>
-                <div class="html">
-                    {html}
-                </div>
-                {quote && (
-                    <Quote quote={quote} quoter={quoter} />
-                )}
-                </div>
-                
+        <p class="hidden" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
             </div>
-        )}
 
-        {blogs && (
-            <>
-                <ListH1>Blog</ListH1>
 
-                <ul class="blog-list" itemscope itemtype="https://schema.org/Blog">
-                    {blogs.map((blog) => (
-                        <li class="blog-list-item">
-                            <a href={`/blog/${blog.slug}`} itemprop="url">
-                                <div style="height: 200px; overflow: hidden;">
-                                    <div style="display: flex; align-items: center; justify-content: center;">
-                                        <img src={blog.featuredImage.url} alt="" itemprop="image" />
+        <Container>
+            {title && (
+                <div itemtype="https://schema.org/BlogPosting">
+                    <ListH1 itemprop="headline">{title}</ListH1>
+                    {image && (
+                        <div style="display: flex; align-items: center; justify-content: center;">
+                            <img src={image.url} alt="" itemprop="image" />
+                        </div>
+                    )}
+                    <div itemprop="articleBody">
+                    <H2>{subtitle}</H2>
+                    <div class="html">
+                        {html}
+                    </div>
+                    {quote && (
+                        <Quote quote={quote} quoter={quoter} />
+                    )}
+                    </div>
+                    
+                </div>
+            )}
+
+            {blogs && (
+                <>
+                    <ListH1>Blog</ListH1>
+
+                    <ul class="blog-list" itemscope itemtype="https://schema.org/Blog">
+                        {blogs.map((blog) => (
+                            <li class="blog-list-item">
+                                <a href={`/blog/${blog.slug}`} itemprop="url">
+                                    <div style="height: 200px; overflow: hidden;">
+                                        <div style="display: flex; align-items: center; justify-content: center;">
+                                            <img src={blog.featuredImage.url} alt="" itemprop="image" />
+                                        </div>
                                     </div>
-                                </div>
 
-                                <H2 style="text-align: left;">{blog.title}</H2>
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </>
-        )}
-    </Container>
+                                    <H2 style="text-align: left;">{blog.title}</H2>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
+        </Container>  
+        </WhiteBackground>
+        <Footer footer={footer} />
+        <ScreenTransition />  
     </div>
 
     <script type="module" src="/app.js" />

@@ -1,8 +1,5 @@
 ---
 import Layout from '../layouts/mainLayout.svelte';
-import Header from '../components/molecules/Header.svelte';
-import Footer from '../components/molecules/Footer.svelte';
-import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
 import Container from '../components/atoms/Container.svelte';
 import WorkImage from '../components/atoms/WorkImage.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
@@ -12,6 +9,9 @@ import WorkMain from '../components/atoms/WorkMain.svelte';
 import Quote from '../components/molecules/Quote.svelte';
 import List from '../components/molecules/List.svelte';
 import MoreWork from '../components/atoms/MoreWork.svelte';
+import Header from '../components/molecules/Header.svelte';
+import Footer from '../components/molecules/Footer.svelte';
+import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
 import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
 
 import fetchData from '../helpers/fetchData';
@@ -75,55 +75,57 @@ export async function createCollection() {
     };
 }
 ---
-<Layout
-    title={`${work?.title || "Work"} - Abell Design`}
-    menu={menu}
-    header={header}
-    footer={footer}
-    isHome={false}
->
-<div id="swup">
-    <Container>
-        {work.title && (
-            <div itemscope itemtype="https://schema.org/Service">
-                <ListH1 itemprop="name">{work.title}</ListH1>
-                <WorkPrimaryImages>
-                    {(work.images || []).map(image => (
-                        <WorkPrimaryImage>
-                            <img src={image.url} alt='' itemprop="image" />
-                        </WorkPrimaryImage>
-                    ))}
-                </WorkPrimaryImages>
-
-                <WorkMain>
-                    <p class="subtitle">{work.subtitle}</p>
-                    <div class="markdown">
-                        {work?.content?.html}
-                    </div>
-                    {work?.quote?.length > 0 && (
-                        <Quote quote={work.quote} quoter={work.quoteAuthor} />
-                    )}
-                    <WorkPrimaryImages>
-                    {(work.secondaryImages || []).map(image => (
-                        <WorkPrimaryImage>
-                            <img src={image.url} alt='' />
-                        </WorkPrimaryImage>
-                    ))}
-                    </WorkPrimaryImages>
-                    <MoreWork {next} />
-                </WorkMain>
+<Layout title={`${work?.title || "Work"} - Abell Design`} client:load>
+    <div id="swup">
+        <p class="hidden" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
             </div>
-        )}
 
-        {works && (
-            <>
-                <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
+        <Container>
+            {work.title && (
+                <div itemscope itemtype="https://schema.org/Service">
+                    <ListH1 itemprop="name">{work.title}</ListH1>
+                    <WorkPrimaryImages>
+                        {(work.images || []).map(image => (
+                            <WorkPrimaryImage>
+                                <img src={image.url} alt='' itemprop="image" />
+                            </WorkPrimaryImage>
+                        ))}
+                    </WorkPrimaryImages>
 
-                <Quote quote={quote} quoter={quoter} />
-            </>
-        )}
-    </Container>
-</div>
+                    <WorkMain>
+                        <p class="subtitle">{work.subtitle}</p>
+                        <div class="markdown">
+                            {work?.content?.html}
+                        </div>
+                        {work?.quote?.length > 0 && (
+                            <Quote quote={work.quote} quoter={work.quoteAuthor} />
+                        )}
+                        <WorkPrimaryImages>
+                        {(work.secondaryImages || []).map(image => (
+                            <WorkPrimaryImage>
+                                <img src={image.url} alt='' />
+                            </WorkPrimaryImage>
+                        ))}
+                        </WorkPrimaryImages>
+                        <MoreWork {next} />
+                    </WorkMain>
+                </div>
+            )}
 
+            {works && (
+                <>
+                    <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
+
+                    <Quote quote={quote} quoter={quoter} />
+                </>
+            )}
+        </Container>
+        </WhiteBackground>
+        <Footer footer={footer} />
+        <ScreenTransition />
+    </div>
     <script type="module" src="/app.js" />
 </Layout>
