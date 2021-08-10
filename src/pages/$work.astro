@@ -76,8 +76,8 @@ export async function createCollection() {
 }
 ---
 <Layout title={`${work?.title || "Work"} - Abell Design`} client:load>
-    <div id="swup">
-        <p class="hidden" itemprop="name">Abell Design</p>
+    <div>
+        <p class="hidden"  style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
         <WhiteBackground>
             <div class="header-container">
                 <Header {header} {menu} isHome={false} />

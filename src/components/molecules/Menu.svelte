@@ -7,7 +7,7 @@
 	<ul>
 		{#each menu as menuItem (menuItem.slug)}
 			<li>
-				<a href={`${menuItem.slug.length > 1 ? `/${menuItem.slug}` : `${menuItem.slug}`}`}>
+				<a href={`${menuItem.slug.length > 1 ? `/${menuItem.slug}` : `${menuItem.slug}#article`}`}>
 					{menuItem.text}
                 </a>
 			</li>
