@@ -32,12 +32,10 @@ const data = (await fetchData(fetch, homeQuery)) || {
 
 if (data && data.works) {
     data.works =
-        (data.works &&
-            data.works.filter(work => work.showOnHomepage).map((work, index) => {
-                work.oddEven = index % 2;
-                return work;
-            })) ||
-        [];
+        (data?.works.filter(work => work.showOnHomepage).map((work, index) => {
+            work.oddEven = index % 2;
+            return work;
+        })) || [];
 } else {
     data.works = [];
 }
@@ -53,16 +51,14 @@ if (data && data.services) {
 
 const { works, services, homepage, brands } = data;
 ---
-<Layout
-    title={title}
-    client:load
->
+
+<Layout title={title}>
     <div>
         <p class="hidden" itemprop="name" style="position: absolute; left: -100vw">Abell Design</p>
-        <WhiteBackground>
+        <WhiteBackground client:load>
             <div class="header-container">
                 <CTA title={homepage[0].title} subtitle={homepage[0].subtitle} />
-                <Header {header} {menu} isHome={true} />
+                <Header client:load {header} {menu} isHome={true} />
             </div>
 
             <Container isHome={true}>

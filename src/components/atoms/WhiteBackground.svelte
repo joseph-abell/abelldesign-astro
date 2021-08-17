@@ -1,4 +1,4 @@
-<div><slot /></div>
+<div class='white-background'><slot /></div>
 
 <style>
 	div {

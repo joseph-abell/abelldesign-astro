@@ -15,10 +15,5 @@
 </head>
 <body itemscope itemtype="https://schema.org/LocalBusiness">
     <slot />
-
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
-        async
-    />
 </body>
 </html>
