@@ -1,18 +1,17 @@
 ---
 import Layout from '../layouts/mainLayout.astro';
-import Container from '../components/atoms/Container.svelte';
+import Container from '../components/atoms/Container.astro';
 import WorkImage from '../components/atoms/WorkImage.svelte';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import WorkPrimaryImages from '../components/atoms/WorkPrimaryImages.svelte';
 import WorkPrimaryImage from '../components/atoms/WorkPrimaryImage.svelte';
 import WorkMain from '../components/atoms/WorkMain.svelte';
-import Quote from '../components/molecules/Quote.svelte';
-import List from '../components/molecules/List.svelte';
+import Quote from '../components/molecules/Quote.astro';
+import List from '../components/molecules/List.astro';
 import MoreWork from '../components/atoms/MoreWork.svelte';
 import Header from '../components/molecules/Header.svelte';
-import Footer from '../components/molecules/Footer.svelte';
-import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
-import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
+import Footer from '../components/molecules/Footer.astro';
+import WhiteBackground from '../components/atoms/WhiteBackground.astro';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -125,6 +124,5 @@ export async function createCollection() {
         </Container>
         </WhiteBackground>
         <Footer footer={footer} />
-        <ScreenTransition />
     </div>
 </Layout>

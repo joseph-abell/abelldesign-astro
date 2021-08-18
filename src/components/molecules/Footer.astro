@@ -1,10 +1,10 @@
-<script>
+---
 	import SocialMediaItem from './SocialMediaItem.svelte';
 	import FooterLogoContainer from '../atoms/FooterLogoContainer.svelte';
 	import FooterImage from '../atoms/FooterImage.svelte';
 
-	export let footer;
-</script>
+	const { footer } = Astro.props;
+---
 
 <footer>
 	<div class="footer-container">

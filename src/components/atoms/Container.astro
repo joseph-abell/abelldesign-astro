@@ -1,0 +1,7 @@
+---
+const {isHome} = Astro.props;
+---
+
+<article class={isHome ? 'isHome container-atom' : 'container-atom'}>
+	<slot />
+</article>

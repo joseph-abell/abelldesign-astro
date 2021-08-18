@@ -1,12 +1,11 @@
 ---
 import Layout from '../layouts/mainLayout.astro';
-import Container from '../components/atoms/Container.svelte';
+import Container from '../components/atoms/Container.astro';
 import ListH1 from '../components/atoms/ListH1.svelte';
 import A from '../components/atoms/A.svelte';
 import Header from '../components/molecules/Header.svelte';
-import Footer from '../components/molecules/Footer.svelte';
-import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
-import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
+import Footer from '../components/molecules/Footer.astro';
+import WhiteBackground from '../components/atoms/WhiteBackground.astro';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -108,7 +107,6 @@ let {
         </Container>
                 </WhiteBackground>
         <Footer footer={footer} />
-        <ScreenTransition />
     </div>
 
     <script

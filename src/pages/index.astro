@@ -1,15 +1,14 @@
 ---
 import Layout from '../layouts/mainLayout.astro';
-import Container from '../components/atoms/Container.svelte';
-import Services from '../components/molecules/Services.svelte';
-import List from '../components/molecules/List.svelte';
-import Brands from '../components/molecules/Brands.svelte';
-import Quote from '../components/molecules/Quote.svelte';
+import Container from '../components/atoms/Container.astro';
+import Services from '../components/molecules/Services.astro';
+import List from '../components/molecules/List.astro';
+import Brands from '../components/molecules/Brands.astro';
+import Quote from '../components/molecules/Quote.astro';
 import Header from '../components/molecules/Header.svelte';
-import CTA from '../components/atoms/CTA.svelte';
-import Footer from '../components/molecules/Footer.svelte';
-import WhiteBackground from '../components/atoms/WhiteBackground.svelte';
-import ScreenTransition from '../components/atoms/ScreenTransition.svelte';
+import CTA from '../components/atoms/CTA.astro';
+import Footer from '../components/molecules/Footer.astro';
+import WhiteBackground from '../components/atoms/WhiteBackground.astro';
 
 import fetchData from '../helpers/fetchData';
 import siteQuery from '../queries/site';
@@ -69,6 +68,5 @@ const { works, services, homepage, brands } = data;
             </Container>
         </WhiteBackground>
         <Footer footer={footer} />
-        <ScreenTransition />
     </div>
 </Layout>
