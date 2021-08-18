@@ -1,6 +1,6 @@
-<script>
-	export let style = '';
-</script>
+---
+	const { style = '' } = Astro.props();
+---
 
 <h2 {style}><slot /></h2>
 

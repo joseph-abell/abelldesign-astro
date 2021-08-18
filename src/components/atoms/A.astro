@@ -1,0 +1,5 @@
+---
+	const { href, color = '#B40808', display = 'inline-block', padding = '0' } = Astro.props;
+---
+
+<a {href} style="--color: {color}; --display: {display}; --padding: {padding}" class="A"><slot /></a>

@@ -1,5 +1,5 @@
 <script>
-	import FooterA from '../atoms/FooterA.svelte';
+	import FooterA from '../atoms/FooterA.astro';
 
 	export let image = '';
 	export let text = '';

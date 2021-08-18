@@ -1,6 +1,6 @@
 <script>
 	import IntroText from '../atoms/IntroText.svelte';
-	import A from '../atoms/A.svelte';
+	import A from '../atoms/A.astro';
 	import IntroImage from '../atoms/IntroImage.svelte';
 
 	export let homepage;

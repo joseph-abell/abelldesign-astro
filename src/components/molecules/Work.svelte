@@ -1,5 +1,5 @@
 <script>
-	import H2 from '../atoms/H2.svelte';
+	import H2 from '../atoms/H2.astro';
 	import ContentList from '../atoms/ContentList.svelte';
 	import ContentListItem from '../atoms/ContentListItem.svelte';
 	import SpanAsLink from '../atoms/SpanAsLink.svelte';

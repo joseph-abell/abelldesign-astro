@@ -1,7 +1,7 @@
 <script>
 	import H3 from '../atoms/H3.svelte';
 	import P from '../atoms/P.svelte';
-	import A from '../atoms/A.svelte';
+	import A from '../atoms/A.astro';
 	export let item;
 </script>
 

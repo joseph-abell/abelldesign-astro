@@ -1,7 +1,6 @@
-<script>
-	export let style = '';
-    export let itemprop;
-</script>
+---
+	const { style = '', itemprop } = Astro.props;
+---
 
 <h1 {style} itemprop={itemprop}><slot /></h1>
 
