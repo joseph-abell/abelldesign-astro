@@ -5,7 +5,7 @@
 </script>
 
 <div class="more-work">
-	<a href={next.slug}>
+	<a href={`/work/${next.slug}`}>
 		<div class="more-work-text">
 			<h3>More Work:</h3>
 			<p>{next.title}</p>
