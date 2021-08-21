@@ -1,0 +1,52 @@
+---
+import Layout from '../../layouts/mainLayout.astro';
+import Container from '../../components/atoms/Container.astro';
+import WorkImage from '../../components/atoms/WorkImage.svelte';
+import ListH1 from '../../components/atoms/ListH1.astro';
+import WorkPrimaryImages from '../../components/atoms/WorkPrimaryImages.svelte';
+import WorkPrimaryImage from '../../components/atoms/WorkPrimaryImage.svelte';
+import WorkMain from '../../components/atoms/WorkMain.svelte';
+import Quote from '../../components/molecules/Quote.astro';
+import List from '../../components/molecules/List.astro';
+import MoreWork from '../../components/atoms/MoreWork.svelte';
+import Header from '../../components/molecules/Header.svelte';
+import Footer from '../../components/molecules/Footer.astro';
+import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
+
+import fetchData from '../../helpers/fetchData';
+import siteQuery from '../../queries/site';
+import query from '../../queries/works';
+import nextWorkQuery from '../../queries/nextWork';
+import firstWorkQuery from '../../queries/firstWork';
+
+const { collection } = Astro.props;
+
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+const {works = [], quote, quoter} = await fetchData(fetch, query);
+
+---
+<Layout title='Work - Abell Design'>
+    <div>
+        <p class="hidden"  style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
+            </div>
+
+        <Container>
+            <List title="Work" data={works || []} headerType="h1" slugPrefix="/work" />
+
+            <Quote quote={quote} quoter={quoter} />
+        </Container>
+        </WhiteBackground>
+        <Footer footer={footer} />
+    </div>
+</Layout>

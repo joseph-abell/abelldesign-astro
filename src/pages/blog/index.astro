@@ -1,0 +1,62 @@
+---
+import Layout from '../../layouts/mainLayout.astro';
+import Container from '../../components/atoms/Container.astro';
+import ListH1 from '../../components/atoms/ListH1.astro';
+import H2 from '../../components/atoms/H2.astro';
+import Quote from '../../components/molecules/Quote.astro';
+import Header from '../../components/molecules/Header.svelte';
+import Footer from '../../components/molecules/Footer.astro';
+import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
+import CTA from '../../components/atoms/CTA.astro';
+
+import fetchData from '../../helpers/fetchData';
+import siteQuery from '../../queries/site';
+import query from '../../queries/blogs';
+
+const { collection } = Astro.props;
+
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+let {blogs = []} = await fetchData(fetch, query);
+blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
+
+---
+
+<Layout title='Blog - Abell Design'>
+    <div>
+        <p class="hidden" style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
+            </div>
+
+            <Container>
+                <ListH1>Blog</ListH1>
+
+                <ul class="blog-list" itemscope itemtype="https://schema.org/Blog">
+                    {blogs.map((blog) => (
+                        <li class="blog-list-item">
+                            <a href={`/blog/${blog.slug}`} itemprop="url">
+                                <div style="height: 200px; overflow: hidden;">
+                                    <div style="display: flex; align-items: center; justify-content: center;">
+                                        <img src={blog.featuredImage.url} alt="" itemprop="image" />
+                                    </div>
+                                </div>
+
+                                <H2 style="text-align: left;">{blog.title}</H2>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </Container>  
+        </WhiteBackground>
+        <Footer footer={footer} />
+    </div>
+</Layout>

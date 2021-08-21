@@ -27,6 +27,7 @@ const works = `
         }
         quote
         quoteAuthor
+        stage
     }
     worksPages(first:1) {
       quote

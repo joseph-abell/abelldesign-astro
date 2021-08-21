@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/mainLayout.astro';
+import Container from '../../components/atoms/Container.astro';
+import ListH1 from '../../components/atoms/ListH1.astro';
+import H2 from '../../components/atoms/H2.astro';
+import Quote from '../../components/molecules/Quote.astro';
+import Header from '../../components/molecules/Header.svelte';
+import Footer from '../../components/molecules/Footer.astro';
+import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
+import CTA from '../../components/atoms/CTA.astro';
+
+import fetchData from '../../helpers/fetchData';
+import siteQuery from '../../queries/site';
+import query from '../../queries/blogs';
+
+export async function getStaticPaths() {
+    const {blogs = []} = await fetchData(fetch, query);
+
+    return blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt).map(blog => ({ params: { slug: blog.slug }}));
+}
+
+const siteData = await fetchData(fetch, siteQuery);
+const { headers, footers } = siteData;
+let { menu } = siteData;
+
+menu = menu.sort((a, b) => a.order - b.order);
+
+const header = headers[0];
+const footer = footers[0];
+
+let {blogs = []} = await fetchData(fetch, query);
+blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
+
+const blog = blogs.find(blog => blog.slug === Astro.request.params.slug)
+
+const {title, image, subtitle, content = {html: ''}, quote, quoter} = blog;
+const { html } = content;
+---
+
+<Layout title={`${title || 'Blog'} - Abell Design`}>
+    <div>
+        <p class="hidden" style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
+        <WhiteBackground>
+            <div class="header-container">
+                <Header {header} {menu} isHome={false} />
+            </div>
+
+            <Container>
+                <div itemtype="https://schema.org/BlogPosting">
+                    <ListH1 itemprop="headline">{title}</ListH1>
+                    {image && (
+                        <div style="display: flex; align-items: center; justify-content: center;">
+                            <img src={image.url} alt="" itemprop="image" />
+                        </div>
+                    )}
+                    <div itemprop="articleBody">
+                    <H2>{subtitle}</H2>
+                    <div class="html">
+                        {html}
+                    </div>
+                    {quote && (
+                        <Quote quote={quote} quoter={quoter} />
+                    )}
+                    </div>
+                    
+                </div>
+            </Container>  
+        </WhiteBackground>
+        <Footer footer={footer} />
+    </div>
+</Layout>

@@ -7,7 +7,7 @@
     "build": "astro build"
   },
   "devDependencies": {
-    "astro": "^0.18.13",
+    "astro": "^0.19.1",
     "svelte": "^3.42.1"
   }
 }

@@ -1,14 +1,11 @@
-<script>
+---
 	import FooterA from '../atoms/FooterA.astro';
 
-	export let image = '';
-	export let text = '';
-	export let link = '';
-	export let alt = '';
-</script>
+	const { alt = '', link = '', text = '', image = '' } = Astro.props;
+---
 
 <li>
-	{#if !!link}
+	{!!link && (
 		<a href={link}>
 			<div class="imageContainer">
 				<img src={image} {alt} />
@@ -16,7 +13,9 @@
 
 			<FooterA>{text}</FooterA>
 		</a>
-	{:else}
+	)}
+
+	{!link && (
 		<div class="flex">
 			<div class="imageContainer">
 				<div style="display: flex;">
@@ -26,7 +25,7 @@
 
 			<div>{text}</div>
 		</div>
-	{/if}
+	)}
 </li>
 
 <style>
