@@ -9,7 +9,6 @@
 	let src = header.image.url;
 	let alt = 'Abell Design';
 	let menuOpen = false;
-	console.log(menuOpen);
 	let onClick = () => (menuOpen = !menuOpen);
 </script>
 

@@ -21,10 +21,7 @@ import firstWorkQuery from '../../queries/firstWork';
 
 export async function getStaticPaths() {
     const {works = []} = await fetchData(fetch, query);
-    console.log(works[0]);
-    const result = works.filter((work) => work.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt).map(blog => ({ params: { slug: blog.slug }}))
-    console.log(result);
-    return result;
+    return works.filter((work) => work.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt).map(blog => ({ params: { slug: blog.slug }}))
 }
 
 const siteData = await fetchData(fetch, siteQuery);
