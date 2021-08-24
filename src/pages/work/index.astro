@@ -30,8 +30,8 @@ menu = menu.sort((a, b) => a.order - b.order);
 const header = headers[0];
 const footer = footers[0];
 
-const {works = [], quote, quoter} = await fetchData(fetch, query);
-
+const {works = [], worksPages} = await fetchData(fetch, query);
+const { quote, quoter } = worksPages[0];
 ---
 <Layout title='Work - Abell Design'>
     <div>

@@ -1,38 +1,37 @@
 const works = `
   query {
     works {
-        id
-        createdAt
-        publishedAt
-        title
-        slug
-        images {
-          url
-          height
-        }
-        keywords
-        featuredDeck
-        featuredImage {
-          url
-          height
-        }
-        featuredLinkText
-        secondaryImages {
-          url
-          height
-        }
-        subtitle
-        content {
-            html
-        }
-        quote
-        quoteAuthor
-        stage
+      id
+      createdAt
+      publishedAt
+      title
+      slug
+      images {
+        url
+        height
+      }
+      keywords
+      featuredDeck
+      featuredImage {
+        url
+        height
+      }
+      featuredLinkText
+      secondaryImages {
+        url
+        height
+      }
+      subtitle
+      content {
+        html
+      }
+      quote
+      quoteAuthor
+      stage
     }
     worksPages(first:1) {
       quote
       quoter
-
     }
   }  
 `;
