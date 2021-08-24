@@ -54,15 +54,14 @@ const { html } = content;
                         </div>
                     )}
                     <div itemprop="articleBody">
-                    <h2 style="text-align: left; color: rgba(0, 0, 0, 0.8); margin-bottom: 20px; margin-top: 40px; font-weight: 700;">{subtitle}</h2>
-                    <div class="html">
-                        {html}
+                        <h2 style="text-align: left; color: rgba(0, 0, 0, 0.8); margin-bottom: 20px; margin-top: 40px; font-weight: 700;">{subtitle}</h2>
+                        <div class="html">
+                            {html}
+                        </div>
+                        {quote && (
+                            <Quote quote={quote} quoter={quoter} />
+                        )}
                     </div>
-                    {quote && (
-                        <Quote quote={quote} quoter={quoter} />
-                    )}
-                    </div>
-                    
                 </div>
             </Container>  
         </WhiteBackground>
