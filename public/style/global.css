@@ -169,6 +169,16 @@ a {
   width: 24px;
 }
 
+.contact-page .contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contact-page .contact-list .image {
+  min-width: 25px;
+}
+
 .contact-page header img {
   width: auto;
 }
