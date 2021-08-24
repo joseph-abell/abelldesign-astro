@@ -38,7 +38,7 @@ const {works = [], quote, quoter} = await fetchData(fetch, query);
         <p class="hidden"  style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
         <WhiteBackground>
             <div class="header-container">
-                <Header {header} {menu} isHome={false} />
+                <Header client:load {header} {menu} isHome={false} />
             </div>
 
         <Container>
