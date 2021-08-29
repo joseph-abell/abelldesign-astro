@@ -23,11 +23,10 @@ const blogs = `
             createdAt
             seoDescription
         }
-        blogsPages: {
+        blogsPages {
             seoDescription
         }
     }
-  
 `;
 
 export default blogs;

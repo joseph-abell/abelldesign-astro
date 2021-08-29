@@ -32,7 +32,6 @@ export const home = `
       work {
           slug
       }
-      seoDescription
     }
     homepage: homepages(first: 1) {
       title
@@ -47,6 +46,7 @@ export const home = `
       brandsText
       quote
       quoter
+      seoDescription
     }
     brands {
         id
