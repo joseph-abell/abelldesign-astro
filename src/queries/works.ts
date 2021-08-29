@@ -28,10 +28,12 @@ const works = `
       quote
       quoteAuthor
       stage
+      seoDescription
     }
     worksPages(first:1) {
       quote
       quoter
+      seoDescription
     }
   }  
 `;

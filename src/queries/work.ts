@@ -27,6 +27,7 @@ const work = `
       }
       quote
       quoteAuthor
+      seoDescription
     }
   }  
 `;

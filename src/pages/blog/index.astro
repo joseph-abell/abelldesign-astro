@@ -24,12 +24,12 @@ menu = menu.sort((a, b) => a.order - b.order);
 const header = headers[0];
 const footer = footers[0];
 
-let {blogs = []} = await fetchData(fetch, query);
+let {blogs = [], blogsPages} = await fetchData(fetch, query);
 blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
 
 ---
 
-<Layout title='Blog - Abell Design'>
+<Layout title='Blog - Abell Design' description={blogsPages[0].seoDescription || ''}>
     <div>
         <p class="hidden" style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
         <WhiteBackground>

@@ -39,6 +39,7 @@ const contact = `
                 latitude
             }
             mapZoom
+            seoDescription
         }
     }
 `;

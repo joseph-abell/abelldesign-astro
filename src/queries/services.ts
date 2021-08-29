@@ -22,6 +22,7 @@ const services = `
     servicesPages(first:1) {
       quote
       quoter
+      seoDescription
     }
   }  
 `;

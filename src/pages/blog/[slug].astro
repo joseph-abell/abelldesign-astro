@@ -37,7 +37,7 @@ const {title, image, subtitle, content = {html: ''}, quote, quoter} = blog;
 const { html } = content;
 ---
 
-<Layout title={`${title || 'Blog'} - Abell Design`}>
+<Layout title={`${title || 'Blog'} - Abell Design`} description={blog.seoDescription || ''}>
     <div>
         <p class="hidden" style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
         <WhiteBackground>

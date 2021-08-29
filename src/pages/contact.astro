@@ -45,7 +45,7 @@ let {
 	} = contacts[0];
 ---
 
-<Layout title={siteTitle}>
+<Layout title={siteTitle} description={contacts[0].seoDescription || ''}>
     <div class="contact-page">
         <p class="hidden" itemprop="name" style="position: absolute; left: -100vw">Abell Design</p>
         <WhiteBackground>

@@ -32,6 +32,7 @@ export const home = `
       work {
           slug
       }
+      seoDescription
     }
     homepage: homepages(first: 1) {
       title

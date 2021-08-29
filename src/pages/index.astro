@@ -51,7 +51,7 @@ if (data && data.services) {
 const { works, services, homepage, brands } = data;
 ---
 
-<Layout title={title}>
+<Layout title={title} description={homepage[0].seoDescription || ''}>
     <div>
         <p class="hidden" itemprop="name" style="position: absolute; left: -100vw">Abell Design</p>
         <WhiteBackground client:load>

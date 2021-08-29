@@ -21,6 +21,10 @@ const blogs = `
             subtitle
             title
             createdAt
+            seoDescription
+        },
+        blogsPages: {
+            seoDescription
         }
     }
   

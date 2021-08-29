@@ -18,6 +18,7 @@ const blog = `
               height
               url
             }
+            seoDescription
         }
     }
 `;

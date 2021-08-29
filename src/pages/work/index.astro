@@ -35,7 +35,7 @@ works = works.map((work, index) => ({...work, oddEven: index % 2 }))
 
 const { quote, quoter } = worksPages[0];
 ---
-<Layout title='Work - Abell Design'>
+<Layout title='Work - Abell Design' description={worksPages[0].seoDescription || ''}>
     <div>
         <p class="hidden"  style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
         <WhiteBackground>
