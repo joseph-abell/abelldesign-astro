@@ -1,5 +1,5 @@
 export default {
-  public: ["@astrojs/renderer-svelte"],
+  renderers: ["@astrojs/renderer-svelte"],
   buildOptions: {
     sitemap: true,
     site: "https://abelldesign.co.uk",
