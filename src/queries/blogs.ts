@@ -22,7 +22,7 @@ const blogs = `
             title
             createdAt
             seoDescription
-        },
+        }
         blogsPages: {
             seoDescription
         }
