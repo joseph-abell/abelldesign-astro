@@ -30,7 +30,9 @@ menu = menu.sort((a, b) => a.order - b.order);
 const header = headers[0];
 const footer = footers[0];
 
-const {works = [], worksPages} = await fetchData(fetch, query);
+let {works = [], worksPages} = await fetchData(fetch, query);
+works = works.map((work, index) => ({...work, oddEven: index % 2 }))
+
 const { quote, quoter } = worksPages[0];
 ---
 <Layout title='Work - Abell Design'>
