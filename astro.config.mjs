@@ -1,5 +1,8 @@
 export default {
+  public: ["@astrojs/renderer-svelte"],
   buildOptions: {
-    sitemap: true, // Generate sitemap (set to "false" to disable)
+    sitemap: true,
+    site: "https://abelldesign.co.uk",
+    pageUrlFormat: "file",
   },
 };
