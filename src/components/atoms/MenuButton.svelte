@@ -1,7 +1,6 @@
 <script>
 	export let onClick;
 	export let menuOpen;
-	console.log('MenuButton menuOpen', menuOpen);
     export let isHome = false;
 </script>
 
