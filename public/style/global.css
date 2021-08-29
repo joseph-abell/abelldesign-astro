@@ -118,10 +118,9 @@ a {
 }
 
 .workArticle .subtitle {
-  margin-bottom: 20px;
   font-size: 22px;
   max-width: 730px;
-  margin: 0 auto;
+  margin: 0 auto 20px;
 }
 
 .markdown {
