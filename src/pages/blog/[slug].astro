@@ -9,14 +9,15 @@ import Footer from '../../components/molecules/Footer.astro';
 import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
 import CTA from '../../components/atoms/CTA.astro';
 
-import fetchData from '../../helpers/fetchData';
+import { fetchData, getPublished, orderByCreatedAtDate, getSlug } from '../../helpers';
+
 import siteQuery from '../../queries/site';
 import query from '../../queries/blogs';
 
 export async function getStaticPaths() {
     const {blogs = []} = await fetchData(fetch, query);
 
-    return blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt).map(blog => ({ params: { slug: blog.slug }}));
+    return blogs.filter(getPublished)?.sort(orderByCreatedAtDate).map(getSlug);
 }
 
 const siteData = await fetchData(fetch, siteQuery);

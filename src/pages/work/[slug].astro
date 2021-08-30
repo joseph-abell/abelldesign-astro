@@ -13,7 +13,7 @@ import Header from '../../components/molecules/Header.svelte';
 import Footer from '../../components/molecules/Footer.astro';
 import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
 
-import fetchData from '../../helpers/fetchData';
+import { fetchData, orderByCreatedAtDate } from '../../helpers';
 import siteQuery from '../../queries/site';
 import query from '../../queries/works';
 import nextWorkQuery from '../../queries/nextWork';
@@ -21,7 +21,7 @@ import firstWorkQuery from '../../queries/firstWork';
 
 export async function getStaticPaths() {
     const {works = []} = await fetchData(fetch, query);
-    return works.filter((work) => work.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt).map(blog => ({ params: { slug: blog.slug }}))
+    return works.filter((work) => work.stage === 'PUBLISHED')?.sort(orderByCreatedAtDate).map(blog => ({ params: { slug: blog.slug }}))
 }
 
 const siteData = await fetchData(fetch, siteQuery);

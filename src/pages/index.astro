@@ -10,7 +10,7 @@ import CTA from '../components/atoms/CTA.astro';
 import Footer from '../components/molecules/Footer.astro';
 import WhiteBackground from '../components/atoms/WhiteBackground.astro';
 
-import fetchData from '../helpers/fetchData';
+import { fetchData, showOnHomepage, addOddEven } from '../helpers';
 import siteQuery from '../queries/site';
 import homeQuery from '../queries/home';
 
@@ -30,20 +30,13 @@ const data = (await fetchData(fetch, homeQuery)) || {
 };
 
 if (data && data.works) {
-    data.works =
-        (data.works && data.works.filter(work => work.showOnHomepage).map((work, index) => {
-            work.oddEven = index % 2;
-            return work;
-        })) || [];
+    data.works = data.works && data.works.filter(showOnHomepage).map(addOddEven);
 } else {
     data.works = [];
 }
 
 if (data && data.services) {
-    data.services = data.services.filter(service => service.showOnHomepage).map((service, index) => {
-        service.oddEven = index % 2;
-        return service;
-    });
+    data.services = data.services.filter(showOnHomepage).map(addOddEven);
 } else {
     data.services = [];
 }

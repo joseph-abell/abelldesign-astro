@@ -9,11 +9,9 @@ import Footer from '../../components/molecules/Footer.astro';
 import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
 import CTA from '../../components/atoms/CTA.astro';
 
-import fetchData from '../../helpers/fetchData';
+import { fetchData, orderByCreatedAtDate } from '../../helpers';
 import siteQuery from '../../queries/site';
 import query from '../../queries/blogs';
-
-const { collection } = Astro.props;
 
 const siteData = await fetchData(fetch, siteQuery);
 const { headers, footers } = siteData;
@@ -25,8 +23,7 @@ const header = headers[0];
 const footer = footers[0];
 
 let {blogs = [], blogsPages = []} = await fetchData(fetch, query);
-blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort((a, b) => a.createdAt - b.createdAt)
-
+blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort(orderByCreatedAtDate)
 ---
 
 <Layout title='Blog - Abell Design' description={blogsPages[0]?.seoDescription || ''}>

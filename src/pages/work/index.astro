@@ -13,13 +13,11 @@ import Header from '../../components/molecules/Header.svelte';
 import Footer from '../../components/molecules/Footer.astro';
 import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
 
-import fetchData from '../../helpers/fetchData';
+import { fetchData, addOddEven } from '../../helpers';
 import siteQuery from '../../queries/site';
 import query from '../../queries/works';
 import nextWorkQuery from '../../queries/nextWork';
 import firstWorkQuery from '../../queries/firstWork';
-
-const { collection } = Astro.props;
 
 const siteData = await fetchData(fetch, siteQuery);
 const { headers, footers } = siteData;
@@ -31,7 +29,7 @@ const header = headers[0];
 const footer = footers[0];
 
 let {works = [], worksPages} = await fetchData(fetch, query);
-works = works.map((work, index) => ({...work, oddEven: index % 2 }))
+works = works.map(addOddEven)
 
 const { quote, quoter } = worksPages[0];
 ---
