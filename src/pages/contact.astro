@@ -106,11 +106,6 @@ let {
         <Footer footer={footer} />
     </div>
 
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
-        async
-    />
-
     <script>
         function initMap() {
             const theDrey = { lat: 53.9524713, lng: -1.0714173 };
@@ -124,4 +119,9 @@ let {
             });
         }
     </script>  
+
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbBZPaKpc-DpcR3_ysNbaLRHgnxExlfQU&callback=initMap&libraries=&v=weekly"
+        async
+    />
 </Layout> 
