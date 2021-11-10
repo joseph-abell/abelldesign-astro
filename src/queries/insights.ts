@@ -1,6 +1,6 @@
-const blogs = `
-    query blogs {
-        blogs {
+const insights = `
+    query insights {
+        insights {
             id
             content {
                 html
@@ -23,10 +23,10 @@ const blogs = `
             createdAt
             seoDescription
         }
-        blogsPages {
+        insightsPages {
             seoDescription
         }
     }
 `;
 
-export default blogs;
+export default insights;
