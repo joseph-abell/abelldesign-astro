@@ -1,6 +1,6 @@
-const blog = `
-    query blog($slug: String) {
-        blog(where: {slug: $slug}) {
+const insight = `
+    query insight($slug: String) {
+        insight(where: {slug: $slug}) {
             slug
             content {
               html
@@ -22,4 +22,4 @@ const blog = `
         }
     }
 `;
-export default blog;
+export default insight;

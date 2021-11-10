@@ -11,7 +11,7 @@ import CTA from '../../components/atoms/CTA.astro';
 
 import { fetchData, orderByCreatedAtDate } from '../../helpers';
 import siteQuery from '../../queries/site';
-import query from '../../queries/blogs';
+import query from '../../queries/insights';
 
 const siteData = await fetchData(fetch, siteQuery);
 const { headers, footers } = siteData;
@@ -22,11 +22,11 @@ menu = menu.sort((a, b) => a.order - b.order);
 const header = headers[0];
 const footer = footers[0];
 
-let {blogs = [], blogsPages = []} = await fetchData(fetch, query);
-blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort(orderByCreatedAtDate)
+let {insights = [], insightsPages = []} = await fetchData(fetch, query);
+insights = insights.filter((insight) => insight.stage === 'PUBLISHED')?.sort(orderByCreatedAtDate)
 ---
 
-<Layout title='Blog - Abell Design' description={blogsPages[0]?.seoDescription || ''}>
+<Layout title='Insights - Abell Design' description={insightsPages[0]?.seoDescription || ''}>
     <div>
         <p class="hidden" style="position: absolute; left: -100vw" itemprop="name">Abell Design</p>
         <WhiteBackground>
@@ -35,19 +35,19 @@ blogs = blogs.filter((blog) => blog.stage === 'PUBLISHED')?.sort(orderByCreatedA
             </div>
 
             <Container>
-                <ListH1>Blog</ListH1>
+                <ListH1>Insights</ListH1>
 
-                <ul class="blog-list" itemscope itemtype="https://schema.org/Blog">
-                    {blogs.map((blog) => (
-                        <li class="blog-list-item">
-                            <a href={`/blog/${blog.slug}`} itemprop="url">
+                <ul class="insight-list" itemscope itemtype="https://schema.org/Blog">
+                    {insights.map((insight) => (
+                        <li class="insight-list-item">
+                            <a href={`/insight/${insight.slug}`} itemprop="url">
                                 <div style="height: 200px; overflow: hidden;">
                                     <div style="display: flex; align-items: center; justify-content: center;">
-                                        <img src={blog.featuredImage.url} alt="" itemprop="image" />
+                                        <img src={insight.featuredImage.url} alt="" itemprop="image" />
                                     </div>
                                 </div>
 
-                                <H2 style="text-align: left;">{blog.title}</H2>
+                                <H2 style="text-align: left;">{insight.title}</H2>
                             </a>
                         </li>
                     ))}

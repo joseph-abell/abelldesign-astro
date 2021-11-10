@@ -133,29 +133,29 @@ a {
   margin-bottom: 20px;
 }
 
-.blog-list-item {
+.insight-list-item {
   margin-bottom: 40px;
 }
-.blog-list-item p {
+.insight-list-item p {
   color: #b40808;
 }
 
 @media (min-width: 768px) {
-  .blog-list {
+  .insight-list {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
   }
 
-  .blog-list-item {
+  .insight-list-item {
     width: 30%;
     padding: 20px;
   }
 }
-.blog-list-item {
+.insight-list-item {
   margin-bottom: 40px;
 }
-.blog-list-item p {
+.insight-list-item p {
   color: #b40808;
 }
 
