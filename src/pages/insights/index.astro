@@ -40,7 +40,7 @@ insights = insights.filter((insight) => insight.stage === 'PUBLISHED')?.sort(ord
                 <ul class="insight-list" itemscope itemtype="https://schema.org/Blog">
                     {insights.map((insight) => (
                         <li class="insight-list-item">
-                            <a href={`/insight/${insight.slug}`} itemprop="url">
+                            <a href={`/Insights/${insight.slug}`} itemprop="url">
                                 <div style="height: 200px; overflow: hidden;">
                                     <div style="display: flex; align-items: center; justify-content: center;">
                                         <img src={insight.featuredImage.url} alt="" itemprop="image" />
