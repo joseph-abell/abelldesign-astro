@@ -9,5 +9,8 @@
   "devDependencies": {
     "astro": "^0.19.1",
     "svelte": "^3.42.1"
+  },
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001287"
   }
 }

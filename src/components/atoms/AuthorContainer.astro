@@ -1,0 +1,26 @@
+---
+const { name } = Astro.props;
+---
+
+<div class="author-container">
+    <div class="spacer" />
+        <div>By {name}</div>
+    <div class="spacer" />
+</div>
+
+<style>
+.author-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+    margin: 20px auto;
+}
+
+.spacer {
+    width: 17px;
+    height: 2px;
+    background: #B40808;
+    margin: 0 10px;
+}
+</style>
