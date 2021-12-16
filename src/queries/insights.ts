@@ -29,7 +29,6 @@ const insights = `
                     url
                 }
             }
-            date
         }
         insightsPages {
             seoDescription
