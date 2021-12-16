@@ -22,6 +22,13 @@ const insights = `
             title
             createdAt
             seoDescription
+            author {
+                name
+                image {
+                    height
+                    url
+                }
+            }
         }
         insightsPages {
             seoDescription

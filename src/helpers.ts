@@ -1,6 +1,13 @@
 export const getPublished = (item) => item.stage === "PUBLISHED";
 export const getSlug = (item) => ({ params: { slug: item.slug } });
 export const orderByCreatedAtDate = (a, b) => a.createdAt - b.createdAt;
+export const orderByTitle = (a, b) => {
+  const aTitle: string = a.title.trim().toLowerCase();
+  const bTitle: string = b.title.trim().toLowerCase();
+
+  return aTitle.localeCompare(bTitle, "en", { sensitivity: "base" });
+};
+
 export const showOnHomepage = (item) => item.showOnHomepage;
 export const addOddEven = (item, index) => ({
   ...item,

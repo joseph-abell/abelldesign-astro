@@ -3,13 +3,11 @@ import Layout from '../../layouts/mainLayout.astro';
 import Container from '../../components/atoms/Container.astro';
 import ListH1 from '../../components/atoms/ListH1.astro';
 import H2 from '../../components/atoms/H2.astro';
-import Quote from '../../components/molecules/Quote.astro';
 import Header from '../../components/molecules/Header.svelte';
 import Footer from '../../components/molecules/Footer.astro';
 import WhiteBackground from '../../components/atoms/WhiteBackground.astro';
-import CTA from '../../components/atoms/CTA.astro';
 
-import { fetchData, orderByCreatedAtDate } from '../../helpers';
+import { fetchData, orderByTitle } from '../../helpers';
 import siteQuery from '../../queries/site';
 import query from '../../queries/insights';
 
@@ -23,7 +21,8 @@ const header = headers[0];
 const footer = footers[0];
 
 let {insights = [], insightsPages = []} = await fetchData(fetch, query);
-insights = insights.filter((insight) => insight.stage === 'PUBLISHED')?.sort(orderByCreatedAtDate)
+const sortedInsights = insights?.filter((insight) => insight.stage === 'PUBLISHED')?.sort(orderByTitle)
+console.log(sortedInsights.map(i => i.title));
 ---
 
 <Layout title='Insights - Abell Design' description={insightsPages[0]?.seoDescription || ''}>
@@ -38,7 +37,7 @@ insights = insights.filter((insight) => insight.stage === 'PUBLISHED')?.sort(ord
                 <ListH1>Insights</ListH1>
 
                 <ul class="insight-list" itemscope itemtype="https://schema.org/Blog">
-                    {insights.map((insight) => (
+                    {sortedInsights?.map((insight) => (
                         <li class="insight-list-item">
                             <a href={`/insights/${insight.slug}`} itemprop="url">
                                 <div style="height: 200px; overflow: hidden;">
